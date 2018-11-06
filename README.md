@@ -18,17 +18,14 @@ MEM：12GB or higer (for plant sample) / 256GB or higher (for human sample)
 
 Python 2.7 or above
 
-`SAMtools <http://www.htslib.org/>`_ 
-`deepTools <https://deeptools.readthedocs.org>`_
+*`SAMtools <http://www.htslib.org/>`_ 
+*`deepTools <https://deeptools.readthedocs.org>`_
 * `BEDtools <http://bedtools.readthedocs.org/>`_ 
 
 
 Python Modules 'Numpy', 'pandas' and 'Metplotlib'. To install the packages, use the following commands on an UNIX terminal:
-Python Modules 'Numpy', 'pandas' and 'Metplotlib'. To install the packages, use the following commands on an UNIX terminal:
   
-  ::
-
-  $ pip install numpy
-  $ pip install pandas
-  $ pip install matplolib
+  `$ pip install numpy
+  `$ pip install pandas`
+  `$ pip install matplolib`
    
