@@ -1,6 +1,5 @@
-.. image:: https://img.shields.io/badge/python-2.7-blue.svg
 
-# Methylpip
+# MethylC-analyzer
 
 Methylpip is a pipeline developing for analysing WGBS and RRBS, it can utilize not only individual sample also comparison between samples.
  
