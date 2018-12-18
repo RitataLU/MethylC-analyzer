@@ -19,7 +19,8 @@ MEM：12GB or higer (for plant sample) / 256GB or higher (for human sample)
 
 Python 2.7 or above
 
- [SAMtools] (http://www.htslib.org/"SAMtools"
+ [SAMtools] (http://www.htslib.org/"SAMtools")
+ 
  `deepTools <https://deeptools.readthedocs.org>`_
 
   `BEDtools <http://bedtools.readthedocs.org/>`_ 
