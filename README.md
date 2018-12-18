@@ -14,12 +14,15 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 
 # system requirement 
 CPU：No special restrictions, but CPU has 16 cores is more efficient
+
 MEM：12GB or higer (for plant sample) / 256GB or higher (for human sample)
 
 Python 2.7 or above
 
 *`SAMtools <http://www.htslib.org/>`_ 
+
 *`deepTools <https://deeptools.readthedocs.org>`_
+
 * `BEDtools <http://bedtools.readthedocs.org/>`_ 
 
 
