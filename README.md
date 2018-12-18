@@ -27,21 +27,30 @@ Python Modules 'Numpy', 'pandas', 'Metplotlib' and pyBigWig. To install the pack
 	<pip install numpy>
 	<pip install pandas>
 	<pip install matplolib>
+	<pip install math>
+	<pip install scipy>
+	<pip install argparse>
+	<pip install glob>
 	<pip install pyBigWig>
+	<pip install collections>
+	<pip install gzip>
+	<pip install re>
+	<pip install PyQt5>
 
-# Running MethylC
+# Running MethylC-analyzer
 
-* Usage:
 
-> 1.   Make a sample list first
+> 1.   Make a sample list and name it as "sample_list.txt" in the location where methylc.py script
+
 > > sample list format:
+    sample name  CGmap location  group (seperate with a tab)
+```    
+      Contrl_1     ./contrl_1.CGmap  Con
+      Contrl_2     ./contrl_2.CGmap  Con
+      Meta_1       ./Meta_1.CGmap    Meta
+      Meta_2       ./Meta_2.CGmap    Meta
 ```
-      sample name\tCGmap location
-      Contrl_1\tcontrl_1.CGmap 
-      Contrl_2\tcontrl_2.CGmap 
-      Meta_1\tMeta_1.CGmap 
-      Meta_2\tMeta_2.CGmap 
-```
+> 2. * Usage:
 
 ```
 $ python MethylC.py input_gtf_file
@@ -60,7 +69,7 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  -d DEPTH              min size of #C+#T
+  -d DEPTH              min site of #C+#T
   -r REGION             size of region
   -q QUAIFIED           min number of region member
   -hcgc HEATMAP_CG_CUTOFF
@@ -78,4 +87,25 @@ optional arguments:
   -p PROMOTER_SIZE      promoter_size 
   ```
   
+  ## Arguments
+    -d, --DEPTH <INT> 
+    minimum site of 
+    -p, --promoter <INT>
+    Size of promoter, default is 2,000 bp before transcription start site
+    
+    
+    
+  ## Input
+
+     1. gene annotation
+
+  gene annotation in gtf or gff
   
+     2. CGmap
+
+  CGmap file after mapping by utilizing Bsseeker2
+  
+  ## Tutorial
+  
+	
+
