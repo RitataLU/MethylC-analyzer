@@ -29,22 +29,34 @@ Python Modules 'Numpy', 'pandas', 'Metplotlib' and pyBigWig. To install the pack
 	<pip install matplolib>
 	<pip install pyBigWig>
 
-# Running MethylC Usage
+# Running MethylC
 
 * Usage:
 
+> 1.   Make a sample list first
+> > sample list format:
+> > > ```
+> > sample name\tCGmap location
+> > Contrl_1\tcontrl_1.CGmap 
+> > Contrl_2\tcontrl_2.CGmap 
+> > Meta_1\tMeta_1.CGmap 
+> > Meta_2\tMeta_2.CGmap 
 ```
-$ python MethyC.py input_gtf_file
 
-usage: MethyC.py [-h] [-d DEPTH] [-r REGION] [-q QUAIFIED]
-                 [-hcgc HEATMAP_CG_CUTOFF] [-hchhc HEATMAP_CHH_CUTOFF]
-                 [-hchgc HEATMAP_CHG_CUTOFF] [-dcgc DMR_CG_CUTOFF]
-                 [-dchhc DMR_CHH_CUTOFF] [-dchgc DMR_CHG_CUTOFF] [-b BIN_SIZE]
-                 [-p PROMOTER_SIZE]
-                 input_gene_name
+```
+$ python MethylC.py input_gtf_file
+
+
+usage: methylC.py [-h] [-d DEPTH] [-r REGION] [-q QUAIFIED]
+                  [-hcgc HEATMAP_CG_CUTOFF] [-hchhc HEATMAP_CHH_CUTOFF]
+                  [-hchgc HEATMAP_CHG_CUTOFF] [-dcgc DMR_CG_CUTOFF]
+                  [-dchhc DMR_CHH_CUTOFF] [-dchgc DMR_CHG_CUTOFF]
+                  [-b BIN_SIZE] [-p PROMOTER_SIZE]
+                  input_gtf_file sample_list
 
 positional arguments:
-  input_gene_name       path of input gene
+  input_gtf_file        path of gene annotation
+  sample_list           path of sample list
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -63,6 +75,7 @@ optional arguments:
   -dchgc DMR_CHG_CUTOFF
                         DMR_CHG_cutoff
   -b BIN_SIZE           resolution of chrView and Metaplot
-  -p PROMOTER_SIZE      promoter_size
+  -p PROMOTER_SIZE      promoter_size 
   ```
+  
   
