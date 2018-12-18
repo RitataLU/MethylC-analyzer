@@ -17,7 +17,7 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 
 * MEM：12GB or higer (for plant sample) / 256GB or higher (for human sample)
 
-* Python 2.7 or above
+* Python 2.7
 * [SAMtools](http://www.htslib.org/)
 * [deepTools](https://deeptools.readthedocs.org/)
 * [BEDtools](http://bedtools.readthedocs.org/)
@@ -35,12 +35,12 @@ Python Modules 'Numpy', 'pandas', 'Metplotlib' and pyBigWig. To install the pack
 
 > 1.   Make a sample list first
 > > sample list format:
-> > > ```
-> > sample name\tCGmap location
-> > Contrl_1\tcontrl_1.CGmap 
-> > Contrl_2\tcontrl_2.CGmap 
-> > Meta_1\tMeta_1.CGmap 
-> > Meta_2\tMeta_2.CGmap 
+```
+      sample name\tCGmap location
+      Contrl_1\tcontrl_1.CGmap 
+      Contrl_2\tcontrl_2.CGmap 
+      Meta_1\tMeta_1.CGmap 
+      Meta_2\tMeta_2.CGmap 
 ```
 
 ```
