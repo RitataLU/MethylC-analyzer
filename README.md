@@ -89,11 +89,43 @@ optional arguments:
   
   ## Arguments
     -d, --DEPTH <INT> 
-    minimum site of 
+    minimum sites of methlated cytosine and unmethylated cytosine, default is 4
+    
+    -r, --REGION <INT>  
+    size of region, default is 500 bp
+    
+    -q, --QUAIFIED <INT>
+    qulified sites within a region, default is 4
+    
+    -hcgc, --HEATMAP_CG_CUTOFF <INT>
+    PCA and Heatmap cutoff:
+    CG Methylation difference between maximum and minimum regions , default is 0.2
+    
+    -hchgc, --HEATMAP_CHG_CUTOFF<INT>
+    PCA and Heatmap cutoff:
+    CHG Methylation difference between maximum and minimum regions , default is 0.2
+    
+    -hchhc, --HEATMAP_CHH_CUTOFF <INT>
+    PCA and Heatmap cutoff:
+    CHH Methylation difference between maximum and minimum regions , default is 0.2
+
+    -dcgc, --DMR_CG_CUTOFF <INT>
+    CG Methylation difference between 2 groups , default is 0.2
+  
+    -dchgc, --DMR_CHG_CUTOFF <INT>
+    CHG Methylation difference between 2 groups , default is 0.2
+    
+    -dchhc, --DMR_CHH_CUTOFF <INT>
+    CHH Methylation difference between 2 groups , default is 0.2
+                        
+    -b, --BIN_SIZE <INT>
+    Cutoff of chrView and Metaplot:
+    Seperate genome into several bins, and Size of bin, default is 1000000 bp
+    
     -p, --promoter <INT>
     Size of promoter, default is 2,000 bp before transcription start site
     
-    
+   
     
   ## Input
 
@@ -103,9 +135,8 @@ optional arguments:
   
      2. CGmap
 
-  CGmap file after mapping by utilizing Bsseeker2
+  CGmap files after mapping by utilizing Bsseeker2
   
-  ## Tutorial
   
 	
 
