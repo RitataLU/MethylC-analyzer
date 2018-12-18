@@ -21,7 +21,7 @@ Python 2.7 or above
 
  [SAMtools]:http://www.htslib.org/
  
- `deepTools <https://deeptools.readthedocs.org>`_
+ [deepTools]: https://deeptools.readthedocs.org
 
   `BEDtools <http://bedtools.readthedocs.org/>`_ 
 
