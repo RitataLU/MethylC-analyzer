@@ -18,12 +18,15 @@ CPU：No special restrictions, but CPU has 16 cores is more efficient
 MEM：12GB or higer (for plant sample) / 256GB or higher (for human sample)
 
 Python 2.7 or above
+* 名稱兩邊加上`[` `]`然後再連結兩邊加上`(` `)`就可以將連結替換成文字連結
 
-  [SAMtools] (http://www.htslib.org/)
+	[Dillinger](http://dillinger.io/ "link")
  
-  [deepTools] (https://deeptools.readthedocs.org/)
+ [SAMtools](http://www.htslib.org/)
+ 
+ [deepTools](https://deeptools.readthedocs.org/)
   
-  [BEDtools] (http://bedtools.readthedocs.org/)
+ [BEDtools](http://bedtools.readthedocs.org/)
 
 
 Python Modules 'Numpy', 'pandas' and 'Metplotlib'. To install the packages, use the following commands on an UNIX terminal:
