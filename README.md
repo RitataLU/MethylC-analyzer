@@ -130,23 +130,20 @@ optional arguments:
   ## Input
 
      1. gene annotation
+     
+        gene annotation in gtf or gff
 
-  gene annotation in gtf or gff
-  
      2. CGmap
 
-  CGmap files after mapping by utilizing Bsseeker2
-  
-
-  
-  
+        CGmap files after mapping by utilizing Bsseeker2
   
   
   ## GUI interface
   
   The MethylC-analyzer also provide a user friendly GUI interface to let user who are not familiar programming.
   
-  [GUI Tutorial] 
+  [GUI Tutorial] (https://github.com/RitataLU/Methylpip/blob/master/GUI_Tutorial.docx)
+  
   
   
 	
