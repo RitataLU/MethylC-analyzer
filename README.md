@@ -9,8 +9,8 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 * Differentially Methylated Regions (DMRs)
 * DMRs Fold Enrichment (DMRs location enerichment)
 * Differentially Methylated Genes (DMGs)
-* Whole genome chromosome View for each profie & comparison between groups
-* Metaplot for each profie & comparison between groups 
+* Whole genome chromosome View for each profile & comparison between groups
+* Metaplot for each profile & comparison between groups 
 
 # system requirement 
 * CPU：No special restrictions, but CPU has 16 cores is more efficient
@@ -136,6 +136,17 @@ optional arguments:
      2. CGmap
 
   CGmap files after mapping by utilizing Bsseeker2
+  
+
+  
+  
+  
+  
+  ## GUI interface
+  
+  The MethylC-analyzer also provide a user friendly GUI interface to let user who are not familiar programming.
+  
+  [GUI Tutorial] 
   
   
 	
