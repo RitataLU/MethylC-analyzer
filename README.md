@@ -142,7 +142,7 @@ optional arguments:
   
   The MethylC-analyzer also provide a user friendly GUI interface to let user who are not familiar programming.
   
-  [GUI Tutorial] (https://github.com/RitataLU/Methylpip/blob/master/GUI_Tutorial.docx)
+  [GUI tutorial] (https://github.com/RitataLU/Methylpip/blob/master/GUI_Tutorial.docx/)
   
   
   
