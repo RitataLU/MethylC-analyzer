@@ -4,6 +4,9 @@
 MethylC-analyzer is a analyzer developing for analysing WGBS and RRBS, it can utilize not only individual sample also do comparison between groups.
  
 MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and CHH 3 context:
+
+![MethylC-analyzer Flow] (https://github.com/RitataLU/Methylpip/blob/master/Main.jpg)
+
 * Heatmap 
 * PCA
 * Differentially Methylated Regions (DMRs)
@@ -142,7 +145,7 @@ optional arguments:
   
   The MethylC-analyzer also provide a user friendly GUI interface to let user who are not familiar programming.
   
-  [GUI tutorial] (https://github.com/RitataLU/Methylpip/blob/master/GUI_Tutorial.docx/)
+  [GUI tutorial]:  https://github.com/RitataLU/Methylpip/blob/master/GUI_Tutorial.docx/  "GUI tutorial"
   
   
   
