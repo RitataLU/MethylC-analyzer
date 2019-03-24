@@ -28,7 +28,7 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 Python Modules 'Numpy', 'pandas', 'Metplotlib' and pyBigWig. To install the packages, use the following commands on an UNIX terminal:
 
 ```    
-       $ pip install numpy
+        $ pip install numpy
   	$ pip install pandas
   	$ pip install math
   	$ pip install scipy
@@ -148,7 +148,7 @@ optional arguments:
   
   The MethylC-analyzer also provide a user friendly GUI interface to let users who are not familiar programming.
   
-  [GUI tutorial](https://github.com/RitataLU/Methylpip/blob/master/GUI_Tutorial.docx/  "GUI tutorial")
+  [GUI tutorial](https://github.com/RitataLU/Methylpip/blob/master/GUI_Tutorial.docx/"GUI tutorial")
   
   
   
