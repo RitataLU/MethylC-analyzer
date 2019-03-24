@@ -6,10 +6,11 @@ How to run GUI
 ```
   python gui.py
 ```
-pic
+
+![Alt text](https://github.com/RitataLU/MethylC-analyzer/blob/master/GUI_step1.png)
 
 2. Choose the location of input Files (sample list & Gene annotation gtf file)
---------------------------------------
+
 pic
 
 1) This section let users to select input files, containing sample list (.txt) and gene annotation gtf file (.gtf)
