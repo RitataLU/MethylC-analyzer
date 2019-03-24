@@ -1,12 +1,15 @@
-How to run GUI 
+How to run GUI
+==============
 
-1. open the GUI interface by command line
+1. Run the GUI interface by command line
+
 ```
   python gui.py
 ```
 pic
 
 2. Choose the location of input Files (sample list & Gene annotation gtf file)
+--------------------------------------
 pic
 
 1) This section let users to select input files, containing sample list (.txt) and gene annotation gtf file (.gtf)
@@ -29,7 +32,7 @@ pic2
 4)	Selecting gene annotation file’s path (*gene annotation must be a gtf format) 
 
 
-3. Setting Parameters 
-   ==================
+Setting Parameters 
+==================
 
 
