@@ -26,21 +26,21 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 * [BEDtools](http://bedtools.readthedocs.org/)
 
 Python Modules 'Numpy', 'pandas', 'Metplotlib' and pyBigWig. To install the packages, use the following commands on an UNIX terminal:
-  ::
 
-  $ pip install numpy
-  $ pip install pandas
-  $ pip install math
-  $ pip install scipy
-  $ pip install matplolib
-  $ pip install argparse
-  $ pip install glob
-  $ pip install pyBigWig
-  $ pip install collections
-  $ pip install gzip
-  $ pip install re
-  $ pip install PyQt5
-  
+```    
+       $ pip install numpy
+  	$ pip install pandas
+  	$ pip install math
+  	$ pip install scipy
+  	$ pip install matplolib
+  	$ pip install argparse
+  	$ pip install glob
+  	$ pip install pyBigWig
+  	$ pip install collections
+  	$ pip install gzip
+  	$ pip install re
+  	$ pip install PyQt5
+```  
 
 
 # Running MethylC-analyzer
@@ -51,8 +51,8 @@ Python Modules 'Numpy', 'pandas', 'Metplotlib' and pyBigWig. To install the pack
 > > sample list format:
     sample name  CGmap location  group (seperate with a tab)
 ```    
-      Contrl_1     ./contrl_1.CGmap  Con
-      Contrl_2     ./contrl_2.CGmap  Con
+      Contrl_1     ./contrl_1.CGmap  Control
+      Contrl_2     ./contrl_2.CGmap  Control
       Meta_1       ./Meta_1.CGmap    Meta
       Meta_2       ./Meta_2.CGmap    Meta
 ```
