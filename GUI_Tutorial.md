@@ -48,3 +48,5 @@ This section can users choose analysis
 ![Alt text](https://github.com/RitataLU/MethylC-analyzer/blob/master/GUI_group.png)
 
   (3)  The Metaplot advanced option needs to assign a genomic feature (5UTR, 3UTR, CDS, intron, exon, promoter, genebody)which will analysis plot in Metaplot.
+  
+![Alt text](https://github.com/RitataLU/MethylC-analyzer/blob/master/GUI_genomic.png)
