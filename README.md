@@ -5,7 +5,7 @@ MethylC-analyzer is a analyzer developing for analysing WGBS and RRBS, it can ut
  
 MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and CHH 3 context:
 
-![MethylC-analyzer Flow](https://github.com/RitataLU/Methylpip/blob/master/Main%20flow.jpg)
+![MethylC-analyzer Flow](https://github.com/RitataLU/MethylC-analyzer/blob/master/MethylC-analyzer_main.png)
 
 * Heatmap 
 * PCA
