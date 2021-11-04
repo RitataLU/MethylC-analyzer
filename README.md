@@ -24,6 +24,10 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 * [SAMtools](http://www.htslib.org/)
 * [deepTools](https://deeptools.readthedocs.org/)
 * [BEDtools](http://bedtools.readthedocs.org/)
+* R package
+* ComplexHeatmap
+* ggplot2
+
 
 Python Modules 'Numpy', 'pandas', 'Metplotlib' and pyBigWig. To install the packages, use the following commands on an UNIX terminal:
 
