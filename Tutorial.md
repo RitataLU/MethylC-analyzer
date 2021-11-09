@@ -8,22 +8,15 @@
     [BEDtools](http://bedtools.readthedocs.org/), so please make sure you
     already have them on your server.
 
-    
-2. Create a virtual environment somewhere on your disk, and then activate it.
 
-  ```
-  $ virtualenv --no-site-packages --python=python2.7 methylC_env
-  $ source methylC_env/bin/activate
-
- ```
-3. Download the source code and install the requirements.
+2. Download the source code and install the requirements.
 
   ```
   $ git clone https://github.com/RitataLU/MethylC-analyzer.git
   $ sudo sh MethylC-analyzer/requirements/base.txt
  ```
 
-4. Add MethylC-anlyzer/script path to the PATH environment variable.
+3. Add MethylC-anlyzer/script path to the PATH environment variable.
 ``` 
 $ PATH=$PATH:(MethylC-analyzer/script file path)
 $ source ~/.bash_profile
@@ -59,7 +52,7 @@ met1_2       .met1_2_demo.CGmap.gz     met1
 
 **Usage:**
 ```
-$ python MethylC.py samples_list.txt TAR10.genes.gtf
+$ python MethylC.py samples_list.txt TAR10_demo.genes.gtf
 
 
 usage: methylC.py [-h] [-d DEPTH] [-r REGION] [-q QUAIFIED]
@@ -132,7 +125,7 @@ optional arguments:
     Size of promoter, default is 2,000 bp before transcription start site
     ```
 
-**activate interface (choose analysis want to process)
+**Interactive Shell Application for users to select analysis to process
 ```
 Heatmap & PCA Analysis?  (y/n): y
 Identify DMR?  (y/n): y
