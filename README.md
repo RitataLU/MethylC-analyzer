@@ -22,49 +22,64 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 
 * MEM：12GB or higer (for plant sample) / 256GB or higher (for human sample)
 
-* Python 2.7
+* Python > 3.5
 * [SAMtools](http://www.htslib.org/)
 * [deepTools](https://deeptools.readthedocs.org/)
 * [BEDtools](http://bedtools.readthedocs.org/)
+* Python module
+```
+ numpy
+ pandas
+ math
+ scipy
+ matplolib
+ argparse
+ glob
+ pyBigWig
+ collections
+ gzip
+ re
+ PyQt5
+ seaborn
+```
 * R package
-* ComplexHeatmap
-* ggplot2
+   ```
+   ComplexHeatmap
+   ggplot2
+   viridus
+   ```
 
 
 # Installation
 
-1. Obtain Python 2.7 and virturalenv.
+1. Obtain Python 3
 
     MethylC-analyzer depends on [SAMtools](http://www.htslib.org/) and
     [BEDtools](http://bedtools.readthedocs.org/), so please make sure you
     already have them on your server.
 
     
- 
-2. Download the source code and install the requirements.
+2. Recommand to create a [conda](https://docs.conda.io/en/latest/miniconda.html) environment somewhere on your disk, and then activate it.
+  
+  ```
+  $ conda create -n methylC_analyzer_env anaconda python=3
+  $ conda activate methylC_analyzer_env
+
+ ```
+3. Download the source code and install the requirements.
 
   ```
   $ git clone https://github.com/RitataLU/MethylC-analyzer.git
-  $ pip install -r MethylC-analyzer/requirements/base.txt
-  
-  ```
+  $ sudo sh MethylC-analyzer/requirements/base.txt
+ ```
 
-pip will install the following packages: 
+4. Add MethylC-anlyzer/script path to the PATH environment variable.
+``` 
+$ PATH=$PATH:(MethylC-analyzer/script file path)
+$ source ~/.bash_profile
+```
 
-```    
-  $ pip install numpy
-  $ pip install pandas
-  $ pip install math
-  $ pip install scipy
-  $ pip install matplolib
-  $ pip install argparse
-  $ pip install glob
-  $ pip install pyBigWig
-  $ pip install collections
-  $ pip install gzip
-  $ pip install re
-  $ pip install PyQt5
-```  
+
 4. Add MethylC-anlyzer/script path to the PATH environment variable
 
 ``` 
@@ -77,6 +92,108 @@ $ source ~/.bash_profile
 Please follow the tutorial of example use case
 [Tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/Tutorial.md)
 
+# Run MethylC-analyzer
+
+1.   Make a sample list and name it as "samples_list.txt" in the location where methylc.py script
+
+samples list format:
+    sample_name  CGmap_location  group (seperate with a tab)
+```    
+wt1     ./wt1.CGmap.gz  WT
+wt2     ./wt2.CGmap.gz  WT
+wt3     ./wt3.CGmap.gz  WT
+met1_1       ./met1_1.CGmap.gz    met1
+met1_2       .met1_2.CGmap.gz     met1
+met1_3       ./met1_3.CGmap.gz    met1
+
+```
+
+**Input:**
+1. gene annotation (GTF)
+
+2. CGmap (post-alignment data by utilizing Bsseeker2)
+
+**Usage:**
+```
+$ python MethylC.py samples_list.txt TAR10.genes.gtf 
+
+
+usage: MethylC.py [-h] [-d DEPTH] [-r REGION] [-q QUALIFIED] [-hcgc HEATMAP_CG_CUTOFF] [-hchgc HEATMAP_CHG_CUTOFF]
+                  [-hchhc HEATMAP_CHH_CUTOFF] [-dmrcg DMR_CG_CUTOFF] [-dmrchg DMR_CHG_CUTOFF] [-dmrchh DMR_CHH_CUTOFF] [-pvalue PVALUE]
+                  [-b BIN_SIZE] [-p PROMOTER_SIZE]
+                  samples_list input_gtf_file
+
+positional arguments:
+  samples_list          samples CGmap description
+  input_gtf_file        path of gene annotation
+  
+  ```
+  
+  ## Arguments
+    -d, --DEPTH <INT> 
+    minimum sites of methlated cytosine and unmethylated cytosine, default is 4
+    
+    -r, --REGION <INT>  
+    size of region, default is 500 bp
+    
+    -q, --QUAIFIED <INT>
+    qulified sites within a region, default is 4
+    
+    -hcgc, --HEATMAP_CG_CUTOFF <INT>
+    PCA and Heatmap cutoff:
+    CG Methylation difference between maximum and minimum regions , default is 0.2
+    
+    -hchgc, --HEATMAP_CHG_CUTOFF<INT>
+    PCA and Heatmap cutoff:
+    CHG Methylation difference between maximum and minimum regions , default is 0.2
+    
+    -hchhc, --HEATMAP_CHH_CUTOFF <INT>
+    PCA and Heatmap cutoff:
+    CHH Methylation difference between maximum and minimum regions , default is 0.2
+
+    -dcgc, --DMR_CG_CUTOFF <INT>
+    CG Methylation difference between 2 groups , default is 0.2
+  
+    -dchgc, --DMR_CHG_CUTOFF <INT>
+    CHG Methylation difference between 2 groups , default is 0.2
+    
+    -dchhc, --DMR_CHH_CUTOFF <INT>
+    CHH Methylation difference between 2 groups , default is 0.2
+                        
+    -b, --BIN_SIZE <INT>
+    Cutoff of chrView and Metaplot:
+    Seperate genome into several bins, and Size of bin, default is 1000000 bp
+    
+    -p, --promoter <INT>
+    Size of promoter, default is 2,000 bp before transcription start site
+    ```
+
+** activate interface (Users select analysis that want to process)
+```
+Heatmap & PCA Analysis?  (y/n): y
+Identify DMR?  (y/n): y
+Identify DMG?  (y/n): y
+Use Fold Enrichment Analysis?  (y/n): y
+Chromosome View Analysis?  (y/n): y
+Metaplot Analysis?  (y/n): y
+enter experimental group name analysis: met1
+enter control group name analysis: WT
+```
+**Output **
+
+1. The average methylation in 3 context (CG, CHG, CHH)
+* ![Average methylation level](https://github.com/RitataLU/MethylC-analyzer/blob/master/figures/Average_methylation_levels.pdf)
+
+2.
+
+* Heatmap & PCA for variable regions 
+* PCA for variable regions 
+* Identifying Differentially Methylated Regions (DMRs)
+* Genomic regions fold enrichment analysis for DMRs 
+* Identifying Differentially Methylated Genes (DMGs)
+* The distribution fo DNA methylation on each chromosome
+* Metaplot for each profile & comparison between groups 
+
   
 # GUI interface
   
@@ -84,7 +201,7 @@ The MethylC-analyzer also provides a user friendly GUI interface to let users wh
 please follow the tutorial   
 [GUI tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/GUI_Tutorial.md)
 
-  
+ 
   
   
 	
