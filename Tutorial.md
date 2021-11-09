@@ -127,7 +127,7 @@ optional arguments:
     Size of promoter, default is 2,000 bp before transcription start site
     ```
 
-**activate interface (choose analysis want to process)
+** activate interface (choose analysis want to process)
 ```
 Heatmap & PCA Analysis?  (y/n): y
 Identify DMR?  (y/n): y
@@ -138,11 +138,10 @@ Metaplot Analysis?  (y/n): y
 enter experimental group name analysis: met1
 enter control group name analysis: WT
 ```
-**Output Figureq**
+**Output Figures**
 
 
 * Average methylation level
-
 * Heatmap & PCA for variable regions 
 * PCA for variable regions 
 * Identifying Differentially Methylated Regions (DMRs)
