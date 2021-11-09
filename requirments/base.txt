@@ -1,11 +1,17 @@
-pip3 install numpy
-pip3 install pandas
-pip3 install scipy
-pip3 install matplolib
-pip3 install argparse
-pip3 install glob
-pip3 install pyBigWig
-pip3 install collections
-pip3 install gzip
-pip3 install PyQt5
-pip3 install seaborn
+conda install -c bioconda/label/cf201901 bedtools
+pip install deeptools
+conda install -c razaalipath r-complexheatmap
+conda install -c conda-forge r-viridislite
+conda install -c conda-forge r-viridislite
+conda install -c conda-forge/label/gcc7 r-viridislite
+conda install numpy
+conda install pandas
+conda install scipy
+conda install matplolib
+conda install argparse
+conda install glob
+pip pyBigWig
+conda install collections
+conda install gzip
+conda install PyQt5
+conda install seaborn
