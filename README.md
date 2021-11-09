@@ -1,21 +1,23 @@
 
 # MethylC-analyzer
 
-MethylC-analyzer is a analyzer developing for analysing WGBS and RRBS, it can utilize not only individual sample also do comparison between groups.
+MethylC-analyzer is a analyzer developing for analysing DNA methylation on WGBS and RRBS, it could utilize not only individual sample also do comparison between two groups.
  
 MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and CHH 3 context:
 
 ![MethylC-analyzer Flow](https://github.com/RitataLU/MethylC-analyzer/blob/master/MethylC-analyzer_main.png)
 
-* Heatmap 
-* PCA
-* Differentially Methylated Regions (DMRs)
-* DMRs Fold Enrichment (DMRs location enerichment)
-* Differentially Methylated Genes (DMGs)
-* Whole genome chromosome View for each profile & comparison between groups
+* Average methylation level
+* Heatmap for variable regions 
+* PCA for variable regions 
+* Identifying Differentially Methylated Regions (DMRs)
+* Genomic regions fold enrichment analysis for DMRs 
+* Identifying Differentially Methylated Genes (DMGs)
+* The distribution fo DNA methylation on each chromosome
 * Metaplot for each profile & comparison between groups 
 
-# system requirement 
+# <a name="SystemRequirements"></a>System Requirements
+* Linux or Mac OS Environment
 * CPU：No special restrictions, but CPU has 16 cores is more efficient
 
 * MEM：12GB or higer (for plant sample) / 256GB or higher (for human sample)
@@ -28,7 +30,26 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 * ComplexHeatmap
 * ggplot2
 
+# Tutorial 
+Please follow the tutorial of example use case
+* [Tutorial](https://github.com/RitataLU/ATACgraph/blob/master/Tutorial.md)
 
+
+# Installation
+1. Obtain Python 2.7 and virturalenv
+
+MethylC-analyzer depends on SAMtools and BEDtools, so please make sure you already have them on your server.
+
+3. Create a virtual environment somewhere on your disk, and then activate it.
+4. Download the source code and install the requirements.
+
+
+```
+$ git clone https://github.com/RitataLU/ATACgraph.git
+$ cd ATACgraph
+$ sudo sh ./base.txt
+
+``` 
 Python Modules 'Numpy', 'pandas', 'Metplotlib' and pyBigWig. To install the packages, use the following commands on an UNIX terminal:
 
 ```    
@@ -50,20 +71,20 @@ Python Modules 'Numpy', 'pandas', 'Metplotlib' and pyBigWig. To install the pack
 # Running MethylC-analyzer
 
 
-> 1.   Make a sample list and name it as "sample_list.txt" in the location where methylc.py script
+> 1.   Make a sample list and name it as "samples_list.txt" in the location where methylc.py script
 
-> > sample list format:
+> > samples list format:
     sample name  CGmap location  group (seperate with a tab)
 ```    
-      Contrl_1     ./contrl_1.CGmap  Control
-      Contrl_2     ./contrl_2.CGmap  Control
-      Meta_1       ./Meta_1.CGmap    Meta
-      Meta_2       ./Meta_2.CGmap    Meta
+      wt_1     ./wt_1.CGmap.gz	WT
+      wt_2     ./wt_2.CGmap.gz 	WT
+      met1_1       ./met1_1.CGmap.gz	met1
+      met1_2       .met1_2.CGmap.gz	met
 ```
 > 2. * Usage:
 
 ```
-$ python MethylC.py input_gtf_file
+$ python MethylC.py samples_list.txt input_gtf_file
 
 
 usage: methylC.py [-h] [-d DEPTH] [-r REGION] [-q QUAIFIED]
@@ -141,7 +162,7 @@ optional arguments:
 
      1. gene annotation
      
-        gene annotation in gtf or gff
+        gene annotation in GTF
 
      2. CGmap
 
