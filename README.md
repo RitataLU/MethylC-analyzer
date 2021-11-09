@@ -43,11 +43,11 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
  seaborn
 ```
 * R package
-   ```
-   ComplexHeatmap
-   ggplot2
-   viridus
-   ```
+ ```
+  ComplexHeatmap
+  ggplot2
+  viridus
+ ```
 
 
 # Installation
@@ -74,19 +74,12 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
  ```
 
 4. Add MethylC-anlyzer/script path to the PATH environment variable.
-``` 
-$ PATH=$PATH:(MethylC-analyzer/script file path)
-$ source ~/.bash_profile
+ ``` 
+  $ PATH=$PATH:(MethylC-analyzer/script file path)
+  $ source ~/.bash_profile
 ```
 
 
-4. Add MethylC-anlyzer/script path to the PATH environment variable
-
-``` 
-$ PATH=$PATH:(MethylC-analyzer/script file path)
-$ source ~/.bash_profile
-
-```    
 
 # Tutorial 
 Please follow the tutorial of example use case
