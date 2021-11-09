@@ -191,9 +191,9 @@ enter control group name analysis: WT
 
 
 
-  <img align="left" width="10" height="10" src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png">
+  <img align="left" width="100" height="100" src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png">
 
-  <img align="right" width="10" height="15" src="hhttps://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png">
+  <img align="right" width="100" height="150" src="hhttps://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png">
    
 * Heatmap & PCA for variable regions 
 * PCA for variable regions 
