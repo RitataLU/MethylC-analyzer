@@ -36,12 +36,13 @@ Please follow the tutorial of example use case
 
 
 # Installation
+1. Obtain Python 2.7 and virturalenv.
 
-1. Obtain Python 2.7 and virturalenv  
-   .. note::
+  .. note::
     MethylC-analyzer depends on `SAMtools <http://www.htslib.org/>`_ and
     `BEDtools <http://bedtools.readthedocs.org/>`_, so please make sure you
     already have them on your server.
+
     
 2. Create a virtual environment somewhere on your disk, and then activate it.
 
