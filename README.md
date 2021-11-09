@@ -73,11 +73,7 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
   $ sudo sh MethylC-analyzer/requirements/base.txt
  ```
 
-4. Add MethylC-anlyzer/script path to the PATH environment variable.
- ``` 
-  $ PATH=$PATH:(MethylC-analyzer/script file path)
-  $ source ~/.bash_profile
-```
+4. Make sure MethylC-anlyzer/scripts and input files are in the same folder
 
 
 
