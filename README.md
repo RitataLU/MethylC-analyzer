@@ -211,11 +211,6 @@ Heatmap:
 <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/metaplot_delta_CG.png" width="400">
 
 
-# GUI interface
-  
-The MethylC-analyzer also provides a user friendly GUI interface to let users who are not familiar programming.
-please follow the tutorial   
-[GUI tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/GUI_Tutorial.md)
 
  
   
