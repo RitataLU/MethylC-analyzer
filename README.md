@@ -182,10 +182,16 @@ enter control group name analysis: WT
 **Output **
 
 1. The average methylation in 3 context (CG, CHG, CHH)
-![Average methylation level](https://github.com/RitataLU/MethylC-analyzer/blob/master/figures/Average_methylation_levels.pdf)
+![Average methylation level](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Average_methylation_levels.png)
 
-2.
+2. PCA & Heatmap show variable region among samples
+![PCA](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png)
+![Heatmap](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png)
 
+ <img align="left" width="10" height="10" src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png">
+
+ <img align="right" width="10" height="15" src="hhttps://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png">
+   
 * Heatmap & PCA for variable regions 
 * PCA for variable regions 
 * Identifying Differentially Methylated Regions (DMRs)
