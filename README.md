@@ -72,10 +72,16 @@ pip will install the following packages:
   $ pip install re
   $ pip install PyQt5
 ```  
+4. Add MethylC-anlyzer/script path to the PATH environment variable.
+``` 
+$ PATH=$PATH:(MethylC-analyzer/script file path)
+$ source ~/.bash_profile
+
+```    
 
 # Tutorial 
 Please follow the tutorial of example use case
-[Tutorial](https://github.com/RitataLU/ATACgraph/blob/master/Tutorial.md)
+[Tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/Tutorial.md)
 
   
 # GUI interface
