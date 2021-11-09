@@ -179,28 +179,48 @@ Metaplot Analysis?  (y/n): y
 enter experimental group name analysis: met1
 enter control group name analysis: WT
 ```
-**Output **
+**Output Figures**
 
 1. The average methylation in 3 context (CG, CHG, CHH)
-![Average methylation level](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Average_methylation_levels.png)
+
+ <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Average_methylation_levels.png" width="300">
+ 
+![Average methylation level]()
 
 2. PCA & Heatmap show variable region among samples
- <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png" width="48">
- 
-![PCA](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png =250x250)
-![Heatmap](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png =300x250)
 
+PCA: 
+ <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png" width="200">
+ 
+Heatmap: 
+ <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png" width="200">
+
+
+3. The distribution fo DNA methylation on each chromosome
+
+<img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/chrView_CG.png" width="600">
+
+4. The distribution fo DNA methylation difference on each chromosome
+<img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/chrView_delta_CG.png" width="600">
+
+
+5. Summary of dentifying Differentially Methylated Regions (DMRs) & Differentially Methylated Genes (DMGs)
+
+<img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Summary_DMR_DMG_numbers_CG_0.2.png" width="400">
 
    
-* Heatmap & PCA for variable regions 
-* PCA for variable regions 
-* Identifying Differentially Methylated Regions (DMRs)
-* Genomic regions fold enrichment analysis for DMRs 
-* Identifying Differentially Methylated Genes (DMGs)
-* The distribution fo DNA methylation on each chromosome
-* Metaplot for each profile & comparison between groups 
+6. Genomic regions fold enrichment analysis for DMRs 
 
-  
+<img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/CG_Fold_Enrichment.png" width="400">
+
+7. The distribution of DNA methylation around gene body
+
+<img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/metaplot_CG.png" width="400">
+
+8. The distribution of DNA methylation difference around gene body
+<img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/metaplot_delta_CG.png" width="400">
+
+
 # GUI interface
   
 The MethylC-analyzer also provides a user friendly GUI interface to let users who are not familiar programming.
