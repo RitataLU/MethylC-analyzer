@@ -40,21 +40,14 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
     already have them on your server.
 
     
-2. Create a virtual environment somewhere on your disk, and then activate it.
+ 
+2. Download the source code and install the requirements.
 
   ```
-
-  $ virtualenv --no-site-packages --python=python2.7 methylC_env
-  $ source methylC_env/bin/activate
-
- ```
-3. Download the source code and install the requirements.
-
-  ```
-
   $ git clone https://github.com/RitataLU/MethylC-analyzer.git
   $ pip install -r MethylC-analyzer/requirements/base.txt
- ```
+  
+  ```
 
 pip will install the following packages: 
 
@@ -72,7 +65,8 @@ pip will install the following packages:
   $ pip install re
   $ pip install PyQt5
 ```  
-4. Add MethylC-anlyzer/script path to the PATH environment variable.
+4. Add MethylC-anlyzer/script path to the PATH environment variable
+
 ``` 
 $ PATH=$PATH:(MethylC-analyzer/script file path)
 $ source ~/.bash_profile
