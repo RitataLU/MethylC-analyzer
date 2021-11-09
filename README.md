@@ -186,14 +186,10 @@ enter control group name analysis: WT
 
 2. PCA & Heatmap show variable region among samples
 
-![PCA](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png | width=25)
-![Heatmap](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png | width=100)
+![PCA](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png =250x250)
+![Heatmap](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png =300x250)
 
 
-
-  <img align="left" width="100" height="100" src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png">
-
-  <img align="right" width="100" height="150" src="hhttps://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png">
    
 * Heatmap & PCA for variable regions 
 * PCA for variable regions 
