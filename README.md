@@ -182,7 +182,7 @@ enter control group name analysis: WT
 **Output **
 
 1. The average methylation in 3 context (CG, CHG, CHH)
-* ![Average methylation level](https://github.com/RitataLU/MethylC-analyzer/blob/master/figures/Average_methylation_levels.pdf)
+![Average methylation level](https://github.com/RitataLU/MethylC-analyzer/blob/master/figures/Average_methylation_levels.pdf)
 
 2.
 
