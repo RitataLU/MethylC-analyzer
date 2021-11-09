@@ -23,17 +23,18 @@
   $ sudo sh MethylC-analyzer/requirements/base.txt
  ```
 
-4. Add MethylC-anlyzer/script path to the PATH environment variable.
-``` 
-$ PATH=$PATH:(MethylC-analyzer/script file path)
-$ source ~/.bash_profile
-```
+
 
 # Run demo 
 
 ```
 $ cd MethylC-analyzer/demo
 $ tar -xvf demo.tar.gz 
+```
+
+```
+$ mv ../MethylC-analyzer/scripts/* ./
+
 ```
 
 1.   Make a sample list and name it as "samples_list.txt" in the location where methylc.py script
