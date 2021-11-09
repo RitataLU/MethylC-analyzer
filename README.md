@@ -183,25 +183,26 @@ enter control group name analysis: WT
 
 1. The average methylation in 3 context (CG, CHG, CHH)
 
- <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Average_methylation_levels.png" width="300">
- 
-![Average methylation level]()
+ <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Average_methylation_levels.png" width="400">
+
 
 2. PCA & Heatmap show variable region among samples
 
 PCA: 
- <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png" width="200">
+
+ <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png" width="400">
  
 Heatmap: 
- <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png" width="200">
+
+ <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png" width="400">
 
 
 3. The distribution fo DNA methylation on each chromosome
 
-<img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/chrView_CG.png" width="600">
+<img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/chrView_CG.png" width="1000">
 
 4. The distribution fo DNA methylation difference on each chromosome
-<img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/chrView_delta_CG.png" width="600">
+<img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/chrView_delta_CG.png" width="1000">
 
 
 5. Summary of dentifying Differentially Methylated Regions (DMRs) & Differentially Methylated Genes (DMGs)
