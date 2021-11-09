@@ -29,7 +29,7 @@ $ PATH=$PATH:(MethylC-analyzer/script file path)
 $ source ~/.bash_profile
 ```
 
-# Run demo (toy data) 
+# Run demo 
 
 ```
 $ cd MethylC-analyzer/demo
@@ -39,7 +39,7 @@ $ tar -xvf demo.tar.gz
 1.   Make a sample list and name it as "samples_list.txt" in the location where methylc.py script
 
 samples list format:
-sample_name  CGmap_location  group (seperate with a tab)
+    sample_name  CGmap_location  group (seperate with a tab)
 ```    
 wt1     ./wt1_demo.CGmap.gz  WT
 wt2     ./wt2_demo.CGmap.gz  WT
@@ -48,13 +48,9 @@ met1_2       .met1_2_demo.CGmap.gz     met1
 ```
 
 **Input:**
-1. gene annotation
-    
-       gene annotation in GTF
+1. gene annotation (GTF)
 
-2. CGmap
-
-        CGmap files after mapping by utilizing Bsseeker2
+2. CGmap (post-alignment data by utilizing Bsseeker2)
 
 **Usage:**
 ```
