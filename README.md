@@ -36,21 +36,30 @@ Please follow the tutorial of example use case
 
 
 # Installation
-1. Obtain Python 2.7 and virturalenv
 
-MethylC-analyzer depends on SAMtools and BEDtools, so please make sure you already have them on your server.
+1. Obtain Python 2.7 and virturalenv  
+   .. note::
+    MethylC-analyzer depends on `SAMtools <http://www.htslib.org/>`_ and
+    `BEDtools <http://bedtools.readthedocs.org/>`_, so please make sure you
+    already have them on your server.
+    
+2. Create a virtual environment somewhere on your disk, and then activate it.
 
-3. Create a virtual environment somewhere on your disk, and then activate it.
-4. Download the source code and install the requirements.
+  ::
+
+  $ virtualenv --no-site-packages --python=python2.7 methylC_env
+  $ source methylC_env/bin/activate
 
 
-```
-$ git clone https://github.com/RitataLU/ATACgraph.git
-$ cd ATACgraph
-$ sudo sh ./base.txt
+3. Download the source code and install the requirements.
 
-``` 
-Python Modules 'Numpy', 'pandas', 'Metplotlib' and pyBigWig. To install the packages, use the following commands on an UNIX terminal:
+  ::
+
+  $ git clone https://github.com/RitataLU/MethylC-analyzer.git
+  $ pip install -r MethylC-analyzer/requirements/base.txt
+ 
+
+pip will install the following packages: 
 
 ```    
         $ pip install numpy
