@@ -2,28 +2,34 @@
 
 # Installation
 
-1. Obtain Python 2.7 and virturalenv.
+1. Obtain Python 3 and virturalenv.
 
     MethylC-analyzer depends on [SAMtools](http://www.htslib.org/) and
     [BEDtools](http://bedtools.readthedocs.org/), so please make sure you
     already have them on your server.
 
+    
+2. Recommand to create a [conda](https://docs.conda.io/en/latest/miniconda.html) environment somewhere on your disk, and then activate it.
+  
+  ```
+  $ conda create -n methylC_analyzer_env anaconda python=3
+  $ conda activate methylC_analyzer_env
 
-2. Download the source code and install the requirements.
+ ```
+3. Download the source code and install the requirements.
 
   ```
   $ git clone https://github.com/RitataLU/MethylC-analyzer.git
   $ sudo sh MethylC-analyzer/requirements/base.txt
  ```
 
-3. Add MethylC-anlyzer/script path to the PATH environment variable.
+4. Add MethylC-anlyzer/script path to the PATH environment variable.
 ``` 
 $ PATH=$PATH:(MethylC-analyzer/script file path)
 $ source ~/.bash_profile
 ```
 
-# Run demo
-Download the demo input file in ATACgraph folder
+# Run demo (toy data) 
 
 ```
 $ cd MethylC-analyzer/demo
@@ -52,38 +58,38 @@ met1_2       .met1_2_demo.CGmap.gz     met1
 
 **Usage:**
 ```
-$ python MethylC.py samples_list.txt TAR10_demo.genes.gtf
+$ python MethylC.py samples_list.txt TAR10.genes.gtf -d 2 -r 10 -q 2 -hcgc 0.01 -hchhc 0.01 -hchgc 0.01 -b 2000 -pvalue 0.1
 
 
-usage: methylC.py [-h] [-d DEPTH] [-r REGION] [-q QUAIFIED]
-                  [-hcgc HEATMAP_CG_CUTOFF] [-hchhc HEATMAP_CHH_CUTOFF]
-                  [-hchgc HEATMAP_CHG_CUTOFF] [-dcgc DMR_CG_CUTOFF]
-                  [-dchhc DMR_CHH_CUTOFF] [-dchgc DMR_CHG_CUTOFF]
+usage: MethylC.py [-h] [-d DEPTH] [-r REGION] [-q QUALIFIED] [-hcgc HEATMAP_CG_CUTOFF] [-hchgc HEATMAP_CHG_CUTOFF]
+                  [-hchhc HEATMAP_CHH_CUTOFF] [-dmrcg DMR_CG_CUTOFF] [-dmrchg DMR_CHG_CUTOFF] [-dmrchh DMR_CHH_CUTOFF] [-pvalue PVALUE]
                   [-b BIN_SIZE] [-p PROMOTER_SIZE]
-                  input_gtf_file sample_list
+                  samples_list input_gtf_file
 
 positional arguments:
+  samples_list          samples CGmap description
   input_gtf_file        path of gene annotation
-  sample_list           path of sample list
 
 optional arguments:
   -h, --help            show this help message and exit
   -d DEPTH              min site of #C+#T
   -r REGION             size of region
-  -q QUAIFIED           min number of region member
+  -q QUALIFIED          qualified site within a region
   -hcgc HEATMAP_CG_CUTOFF
-                        Heatmap_CG_cutoff
-  -hchhc HEATMAP_CHH_CUTOFF
-                        Heatmap_CHH_cutoff
+                        PCA & Heatmap_CG_cutoff
   -hchgc HEATMAP_CHG_CUTOFF
-                        Heatmap_CHG_cutoff
-  -dcgc DMR_CG_CUTOFF   DMR_CG_cutoff
-  -dchhc DMR_CHH_CUTOFF
-                        DMR_CHH_cutoff
-  -dchgc DMR_CHG_CUTOFF
+                        PCA & Heatmap_CHG_cutoff
+  -hchhc HEATMAP_CHH_CUTOFF
+                        PCA & Heatmap_CHH_cutoff
+  -dmrcg DMR_CG_CUTOFF  DMR_CG_cutoff
+  -dmrchg DMR_CHG_CUTOFF
                         DMR_CHG_cutoff
+  -dmrchh DMR_CHH_CUTOFF
+                        DMR_CHH_cutoff
+  -pvalue PVALUE        p-value for identifying DMR
   -b BIN_SIZE           resolution of chrView and Metaplot
-  -p PROMOTER_SIZE      promoter_size 
+  -p PROMOTER_SIZE      promoter_size
+  
   ```
   
   ## Arguments
@@ -125,7 +131,7 @@ optional arguments:
     Size of promoter, default is 2,000 bp before transcription start site
     ```
 
-**Interactive Shell Application for users to select analysis to process
+**activate interface (choose analysis want to process)
 ```
 Heatmap & PCA Analysis?  (y/n): y
 Identify DMR?  (y/n): y
