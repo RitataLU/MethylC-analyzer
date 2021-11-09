@@ -2,7 +2,7 @@
 
 # Installation
 
-1. Obtain Python 3 and virturalenv.
+1. Obtain Python 3
 
     MethylC-analyzer depends on [SAMtools](http://www.htslib.org/) and
     [BEDtools](http://bedtools.readthedocs.org/), so please make sure you
