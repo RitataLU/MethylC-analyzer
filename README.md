@@ -59,18 +59,18 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 pip will install the following packages: 
 
 ```    
-        $ pip install numpy
-  	$ pip install pandas
-  	$ pip install math
-  	$ pip install scipy
-  	$ pip install matplolib
-  	$ pip install argparse
-  	$ pip install glob
-  	$ pip install pyBigWig
-  	$ pip install collections
-  	$ pip install gzip
-  	$ pip install re
-  	$ pip install PyQt5
+  $ pip install numpy
+  $ pip install pandas
+  $ pip install math
+  $ pip install scipy
+  $ pip install matplolib
+  $ pip install argparse
+  $ pip install glob
+  $ pip install pyBigWig
+  $ pip install collections
+  $ pip install gzip
+  $ pip install re
+  $ pip install PyQt5
 ```  
 
 # Tutorial 
