@@ -185,10 +185,12 @@ enter control group name analysis: WT
 ![Average methylation level](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Average_methylation_levels.png)
 
 2. PCA & Heatmap show variable region among samples
-<img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png" alt="drawing" width="10"/>
-<!-- ![PCA](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png)
-![Heatmap](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png)
- -->
+
+![PCA](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png | width=25)
+![Heatmap](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png | width=100)
+
+
+
   <img align="left" width="10" height="10" src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png">
 
   <img align="right" width="10" height="15" src="hhttps://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png">
