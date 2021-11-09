@@ -35,8 +35,8 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 
 1. Obtain Python 2.7 and virturalenv.
 
-    MethylC-analyzer depends on `SAMtools <http://www.htslib.org/>`_ and
-    `BEDtools <http://bedtools.readthedocs.org/>`_, so please make sure you
+    MethylC-analyzer depends on [SAMtools](http://www.htslib.org/) and
+    [BEDtools](http://bedtools.readthedocs.org/), so please make sure you
     already have them on your server.
 
     
@@ -75,7 +75,7 @@ pip will install the following packages:
 
 # Tutorial 
 Please follow the tutorial of example use case
-* [Tutorial](https://github.com/RitataLU/ATACgraph/blob/master/Tutorial.md)
+[Tutorial](https://github.com/RitataLU/ATACgraph/blob/master/Tutorial.md)
 
   
 # GUI interface
