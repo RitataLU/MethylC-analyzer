@@ -1,13 +1,14 @@
 conda install -c bioconda/label/cf201901 bedtools=2.27.1
-pip install deeptools=3.5.1
+pip install deeptools==3.5.1
 conda install -c razaalipath r-complexheatmap
 conda install numpy=1.20.1
-conda install pandas= 1.2.4
+conda install pandas=1.2.4
 conda install scipy=1.6.2
 conda install matplotlib=3.3.4
 conda install argparse
 conda install glob
-pip install pyBigWig
+#pip install pyBigWig
+conda install pybigwig -c conda-forge -c bioconda
 conda install collections
 conda install gzip
 conda install PyQt5
