@@ -31,23 +31,23 @@ ex: sudo MethylC-analyzer/requirements/base.txt
 
 ```
 $ cd MethylC-analyzer/demo
-$ tar -xvf demo.tar.gz 
+$ tar -xvf demo.gz 
 ```
 
 ```
-$ mv ../MethylC-analyzer/scripts/* ./
+$ mv ../scripts/* ./
 
 ```
 
-1.   Make a sample list and name it as "samples_list.txt" in the location where methylc.py script
+1.   Make a sample list and name it as "samples_list.txt" in the location where MethylC.py scripts
 
 samples list format:
     sample_name  CGmap_location  group (seperate with a tab)
 ```    
-wt1     ./wt1_demo.CGmap.gz  WT
-wt2     ./wt2_demo.CGmap.gz  WT
-met1_1       ./met1_1_demo.CGmap.gz    met1
-met1_2       .met1_2_demo.CGmap.gz     met1
+wt1 ./wt1_demo.CGmap.gz WT
+wt2 ./wt2_demo.CGmap.gz WT
+met1_1  ./met1_1_demo.CGmap.gz met1
+met1_2  ./met1_2_demo.CGmap.gz  met1
 ```
 
 **Input:**
