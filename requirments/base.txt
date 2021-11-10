@@ -7,7 +7,7 @@ conda install scipy
 conda install matplolib
 conda install argparse
 conda install glob
-pip pyBigWig
+pip install pyBigWig
 conda install collections
 conda install gzip
 conda install PyQt5
