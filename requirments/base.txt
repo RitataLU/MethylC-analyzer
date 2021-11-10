@@ -1,9 +1,6 @@
 conda install -c bioconda/label/cf201901 bedtools
 pip install deeptools
 conda install -c razaalipath r-complexheatmap
-conda install -c conda-forge r-viridislite
-conda install -c conda-forge r-viridislite
-conda install -c conda-forge/label/gcc7 r-viridislite
 conda install numpy
 conda install pandas
 conda install scipy
