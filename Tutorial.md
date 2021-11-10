@@ -17,8 +17,9 @@
   $ git clone https://github.com/RitataLU/MethylC-analyzer.git
   
  ```
-4. Run MethylC-analyzer/requirements/base.txt
-ex: sudo MethylC-analyzer/requirements/base.txt
+4. Install Package - Run MethylC-analyzer/requirements/base.txt
+
+    ex: sudo sh MethylC-analyzer/requirements/base.txt
 
 
 
