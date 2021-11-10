@@ -24,16 +24,17 @@
 
 
 # Run demo 
+1. go into folder named 'demo' are decompress demo.gz 
 
-
-
+e.g.
 ```
 $ cd ../demo
 $ tar -xvf demo.gz 
 ```
-
+2. Make sure all scripts and demo files are in the same foder
+  e.g. move scripts in the 'MethylC-analyzer/Demo/demo'
 ```
-$ mv ../scripts/* ./
+$ mv ../../scripts/* ./
 
 ```
 
@@ -42,10 +43,10 @@ $ mv ../scripts/* ./
 samples list format:
     sample_name  CGmap_location  group (seperate with a tab)
 ```    
-wt1 ./wt1_demo.CGmap.gz WT
-wt2 ./wt2_demo.CGmap.gz WT
-met1_1  ./met1_1_demo.CGmap.gz met1
-met1_2  ./met1_2_demo.CGmap.gz  met1
+wt1 wt1_demo.CGmap.gz   WT
+wt2 wt2_demo.CGmap.gz   WT
+met1_1  met1_1_demo.CGmap.gz    met1
+met1_2  met1_2_demo.CGmap.gz    met1
 ```
 
 **Input:**
@@ -68,28 +69,7 @@ positional arguments:
   input_gtf_file        path of gene annotation
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -d DEPTH              min site of #C+#T
-  -r REGION             size of region
-  -q QUALIFIED          qualified site within a region
-  -hcgc HEATMAP_CG_CUTOFF
-                        PCA & Heatmap_CG_cutoff
-  -hchgc HEATMAP_CHG_CUTOFF
-                        PCA & Heatmap_CHG_cutoff
-  -hchhc HEATMAP_CHH_CUTOFF
-                        PCA & Heatmap_CHH_cutoff
-  -dmrcg DMR_CG_CUTOFF  DMR_CG_cutoff
-  -dmrchg DMR_CHG_CUTOFF
-                        DMR_CHG_cutoff
-  -dmrchh DMR_CHH_CUTOFF
-                        DMR_CHH_cutoff
-  -pvalue PVALUE        p-value for identifying DMR
-  -b BIN_SIZE           resolution of chrView and Metaplot
-  -p PROMOTER_SIZE      promoter_size
-  
-  ```
-  
-  ## Arguments
+
     -d, --DEPTH <INT> 
     minimum sites of methlated cytosine and unmethylated cytosine, default is 4
     
@@ -112,13 +92,13 @@ optional arguments:
     CHH Methylation difference between maximum and minimum regions , default is 0.2
 
     -dcgc, --DMR_CG_CUTOFF <INT>
-    CG Methylation difference between 2 groups , default is 0.2
+    CG Methylation difference between 2 groups , default is 0.1
   
     -dchgc, --DMR_CHG_CUTOFF <INT>
-    CHG Methylation difference between 2 groups , default is 0.2
+    CHG Methylation difference between 2 groups , default is 0.1
     
     -dchhc, --DMR_CHH_CUTOFF <INT>
-    CHH Methylation difference between 2 groups , default is 0.2
+    CHH Methylation difference between 2 groups , default is 0.1
                         
     -b, --BIN_SIZE <INT>
     Cutoff of chrView and Metaplot:
