@@ -12,7 +12,7 @@
 2. Recommand to create a [conda](https://docs.conda.io/en/latest/miniconda.html) environment somewhere on your disk, and then activate it.
   
   ```
-  $ conda create -n methylC_analyzer_env anaconda python=3
+  $ conda create -n methylC_analyzer_env 
   $ conda activate (Yout conda path) methylC_analyzer_env
 
  ```
