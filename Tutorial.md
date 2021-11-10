@@ -28,7 +28,7 @@
 
 e.g.
 ```
-$ cd ../demo
+$ cd ../Demo
 $ tar -xvf demo.gz 
 ```
 2. Make sure all scripts and demo files are in the same foder
