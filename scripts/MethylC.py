@@ -83,30 +83,32 @@ DMR_ctrl=str(input('enter control group name analysis: '))
 #     df = pd.read_csv("CommonRegion_"+context+".txt",sep="\t")
 
 def bed_form(inputxt):
-    #df = pd.read_csv(inputxt)
+    
 
     subprocess.call('''awk '{if (NR!=1) print $1"\t"$2"\t"$3}' %s > %s'''%(inputxt, inputxt+".bed"), shell=True)
     return inputxt+".bed"
 
 def Find_DMR(context, cutoff):
-    file1=pd.read_csv("CommonRegion_"+context+".txt",sep="\t")
+    file1=pd.read_csv("CommonRegion_"+context+".txt",sep="\t",dtype =
+            {0:str,1:int,2:int},index_col=[0,1,2])
     # set types for each coulmn 
-    file1.iloc[:,0] = str(file1.iloc[:,0])
-    file1.iloc[:,1:3] = file1.iloc[:,1:3].astype(int)
+    #file1.iloc[:,0] = str(file1.iloc[:,0])
+    #file1.iloc[:,1:3] = file1.iloc[:,1:3].astype(int)
     #add small value (0.001) to prevent meth_level is 0 for statistics (ttest)
-    file1.iloc[:,3:file1.shape[1]] = file1.iloc[:,3:file1.shape[1]].astype(float)+0.0001 
+    file1.iloc[:,0] = file1.iloc[:,0:].astype(float)+0.0001 
+    file1.iloc[:,file1.shape[1]-1] = file1.iloc[:,file1.shape[1]-1].astype(float)+0.0001 
 
     PVALUE =[]
     for i in file1.index:
         expGp = file1.loc[i,expgroup].dropna()
         ctrlGp = file1.loc[i,ctrlgroup].dropna()
         #first 3 columns 
-        file1_col3 = file1.iloc[i,0:3]
-        file1_col3_df = pd.DataFrame(file1_col3).T
+        # file1_col3 = file1.iloc[i,0:3]
+        # file1_col3_df = pd.DataFrame(file1_col3).T
         Delta = expGp.mean()-ctrlGp.mean()
         pval =  stats.ttest_ind(expGp , ctrlGp)[1]
         p = pd.concat([pd.DataFrame(expGp),pd.DataFrame(ctrlGp)]).T
-        p = pd.merge(file1_col3_df, p, left_index = True, right_index = True)
+        #p = pd.merge(file1_col3_df, p, left_index = True, right_index = True)
         p['Delta'] = Delta
         p['pval'] = pval
         PVALUE.append(p)
@@ -116,38 +118,53 @@ def Find_DMR(context, cutoff):
     sig = merge[merge.pval <= pvalue]
     sig_all = sig[(sig.Delta >= cutoff) | (sig.Delta <= -1*cutoff)]
     
-    sig_all.iloc[:,0] = sig_all.iloc[:,0].astype(str)
-
-    sig_all.iloc[:,1:3] =  sig_all.iloc[:,1:3].astype(int)
-    #add small value (0.001) to prevent meth_level is 0 for statistics (ttest)
-    sig_all.iloc[:,3: file1.shape[1]] =  sig_all.iloc[:,3: file1.shape[1]].astype(float)-0.0001 
+    sig_all.iloc[:,0] = sig_all.iloc[:,0:].astype(float)-0.0001 
+    sig_all.iloc[:,file1.shape[1]-1] = sig_all.iloc[:,file1.shape[1]-1].astype(float)-0.0001 
 
 
-    sig_all.to_csv('DMR_'+context+'_all_'+str(cutoff)+'.txt', sep='\t',index=None)
+    sig_all.to_csv('DMR_'+context+'_all_'+str(cutoff)+'.txt', sep='\t')
 
-    sig_all[sig_all.Delta >0].to_csv('DMR_'+context+'_hyper_'+str(cutoff)+'.txt',sep='\t',index=None)
-    sig_all[sig_all.Delta <0].to_csv('DMR_'+context+'_hypo_'+ str(cutoff)+'.txt',sep='\t',index=None)
+    sig_all[sig_all.Delta >0].to_csv('DMR_'+context+'_hyper_'+str(cutoff)+'.txt',sep='\t')
+    sig_all[sig_all.Delta <0].to_csv('DMR_'+context+'_hypo_'+ str(cutoff)+'.txt',sep='\t')
 
+
+def check_dmgempty(file):
+
+    if os.path.getsize(file) > 0:
+        df = pd.read_csv(file,header=None,sep='\t')
+        value = df[3].nunique()
+    else:
+        value = 0
+
+    return value
 
 def DMR_DMGPlot(Context,cutoff):
-    DMR_hyper = pd.read_csv("DMR_"+Context+"_hyper_"+cutoff+".txt", sep='\t')
-    DMR_hypo = pd.read_csv("DMR_"+Context+"_hypo_"+cutoff+".txt", sep='\t')
 
-
-    DMG_hyper_genebody = pd.read_csv("DMG_"+Context+"_hyper_"+str(cutoff)+"_Genebody_list.txt", header=None,sep='\t')
-    DMG_hypo_genebody = pd.read_csv("DMG_"+Context+"_hypo_"+str(cutoff)+"_Genebody_list.txt", header=None,sep='\t')
-
-    DMG_hyper_promoter = pd.read_csv("DMG_"+Context+"_hyper_"+str(cutoff)+"_Promoter_list.txt",header=None, sep='\t')
-    DMG_hypo_promoter = pd.read_csv("DMG_"+Context+"_hypo_"+str(cutoff)+"_Promoter_list.txt", header=None,sep='\t')
+    DMR_hyper = pd.read_csv("DMR_"+Context+"_hyper_"+str(cutoff)+".txt", sep='\t')
+    DMR_hypo = pd.read_csv("DMR_"+Context+"_hypo_"+str(cutoff)+".txt", sep='\t')
 
     R_hyper = len(DMR_hyper)
     R_hypo = len(DMR_hypo)
 
-    Gg_hyper = DMG_hyper_genebody[3].nunique()
-    Gg_hypo = DMG_hypo_genebody[3].nunique()
 
-    Gp_hyper = DMG_hyper_promoter[3].nunique()
-    Gp_hypo = DMG_hypo_promoter[3].nunique()
+    Gg_hyper = check_dmgempty("DMG_"+Context+"_hyper_"+str(cutoff)+"_Genebody_list.txt")
+    Gg_hypo  = check_dmgempty("DMG_"+Context+"_hypo_"+str(cutoff)+"_Genebody_list.txt")
+
+    Gp_hyper = check_dmgempty("DMG_"+Context+"_hyper_"+str(cutoff)+"_Promoter_list.txt")
+    Gp_hypo = check_dmgempty("DMG_"+Context+"_hypo_"+str(cutoff)+"_Promoter_list.txt")
+
+    # DMG_hyper_genebody = pd.read_csv("DMG_"+Context+"_hyper_"+str(cutoff)+"_Genebody_list.txt", header=None,sep='\t')
+    # DMG_hypo_genebody = pd.read_csv("DMG_"+Context+"_hypo_"+str(cutoff)+"_Genebody_list.txt", header=None,sep='\t')
+
+    # DMG_hyper_promoter = pd.read_csv("DMG_"+Context+"_hyper_"+str(cutoff)+"_Promoter_list.txt",header=None, sep='\t')
+    # DMG_hypo_promoter = pd.read_csv("DMG_"+Context+"_hypo_"+str(cutoff)+"_Promoter_list.txt", header=None,sep='\t')
+
+
+    # Gg_hyper = DMG_hyper_genebody[3].nunique()
+    # Gg_hypo = DMG_hypo_genebody[3].nunique()
+
+    # Gp_hyper = DMG_hyper_promoter[3].nunique()
+    # Gp_hypo = DMG_hypo_promoter[3].nunique()
 
     data = { "Category": ['DMR', 'DMR', 'DMG(genebody)','DMG(genebody)','DMG(promoter)','DMG(promoter)'],
   "Number": [R_hyper, R_hypo, Gg_hyper,Gg_hypo,Gp_hyper,Gp_hypo],
@@ -202,7 +219,7 @@ def Enrichment(tag, Cut):
         feature_size=overlap(bed_form("CommonRegion_"+tag+".txt"),bed_form(input_gene_name +'_'+i+'_merge.bed'))
         genome_size=int(subprocess.check_output('''awk '{size+=$3-$2}END{print size}' %s'''%(bed_form("CommonRegion_"+tag+".txt")), shell=True))*1.0
 
-        enrichment=math.log(((float(overlap_size)/float(dmr_size))/(float(feature_size)/float(genome_size))),2)
+        enrichment= math.log(((float(overlap_size)/float(dmr_size))/(float(feature_size)/float(genome_size))),2)
         out = [dmr,feature,overlap_size,dmr_size,feature_size,genome_size,enrichment]
         savefile.loc[len(savefile)]=out
         plt.style.use('ggplot')
@@ -425,6 +442,7 @@ if(DMR=='y'):
 else:
     pass
 
+
 # preprocessing for DMG, fold enrichment
 # generated BED for each genomic region
 
@@ -554,7 +572,7 @@ if(DMG=='y'):
     
     bed_form("DMR_CHG_all_"+str(dmr_CHG_cut)+".txt")
     bed_form("DMR_CHG_hyper_"+str(dmr_CHG_cut)+".txt")
-    bed_form("DMR_CHG_hypo_"+str(dmr_CGH_cut)+".txt")
+    bed_form("DMR_CHG_hypo_"+str(dmr_CHG_cut)+".txt")
 
     bed_form("DMR_CHH_all_"+str(dmr_CHH_cut)+".txt")
     bed_form("DMR_CHH_hyper_"+str(dmr_CHH_cut)+".txt")
@@ -571,12 +589,9 @@ if(DMG=='y'):
     dmg('CHH',"DMR_CHH_hyper_"+str(dmr_CHH_cut)+".txt.bed",'hyper', dmr_CHH_cut)
     dmg('CHH',"DMR_CHH_hypo_"+str(dmr_CHH_cut)+".txt.bed", 'hypo',dmr_CHH_cut)
 
-
-
-
-    #DMR_DMGPlot('CG',dmr_CG_cut)
-    #DMR_DMGPlot('CHG',dmr_CHG_cut)
-    #DMR_DMGPlot('CHH',dmr_CHH_cut)
+    DMR_DMGPlot('CG',str(dmr_CG_cut))
+    DMR_DMGPlot('CHG',dmr_CHG_cut)
+    DMR_DMGPlot('CHH',dmr_CHH_cut)
 
 else:
     pass
@@ -776,3 +791,6 @@ if(Metaplot=='y'):
 
 else:
     pass
+
+subprocess.call('''rm *_tmpchrView.txt''',shell=True)
+

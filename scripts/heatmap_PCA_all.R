@@ -26,7 +26,7 @@ dim(dat2)
 
 ###
 h = Heatmap(as.matrix(dat2[4:end]), clustering_method_rows  = 'ward.D2',clustering_method_columns = 'ward.D2',
-               column_title_gp = gpar(fontsize = 10), name = "methylation", 
+               column_title_gp = gpar(fontsize = 10), name = "methylation", row_dend_width = unit(5, "cm"),
                col=viridis(5),na_col = "black",show_row_names = FALSE)
   
 pdf(paste("Heatmap_",b,"_",cutoff,".pdf",sep = ""),width=6,height=8,useDingbats=FALSE)

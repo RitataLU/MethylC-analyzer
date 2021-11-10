@@ -8,26 +8,26 @@ colors = c('#7360A5',  '#5DBD82')
 metafile1=read.table(paste(samplelist[1,1],"_CG.matrix.gz",sep=''),skip=1)
 metafile2=read.table(paste(samplelist[1,1],"_CHG.matrix.gz",sep=''),skip=1)
 metafile3=read.table(paste(samplelist[1,1],"_CHH.matrix.gz",sep=''),skip=1)
-y_cg=max(apply(as.matrix(metafile1[,7:86]),2,mean,na.rm=T))*1.2*100
-y_chg=max(apply(as.matrix(metafile2[,7:86]),2,mean,na.rm=T))*1.2*100
-y_chh=max(apply(as.matrix(metafile3[,7:86]),2,mean,na.rm=T))*1.2*100
+y_cg=max(apply(as.matrix(metafile1[,7:86]),2,mean,na.rm=T),na.rm=T)*1.2*100
+y_chg=max(apply(as.matrix(metafile2[,7:86]),2,mean,na.rm=T),na.rm=T)*1.2*100
+y_chh=max(apply(as.matrix(metafile3[,7:86]),2,mean,na.rm=T),na.rm=T)*1.2*100
 
 #new add (for ylim scale)
 for (i in 1:nrow(samplelist)){
-    if(max(apply(as.matrix(read.table(paste(samplelist[i,1],"_CG.matrix.gz",sep=''),skip=1)[,7:86]),2,mean,na.rm=T))*1.2*100 > y_cg)
+    if(max(apply(as.matrix(read.table(paste(samplelist[i,1],"_CG.matrix.gz",sep=''),skip=1)[,7:86]),2,mean,na.rm=T),na.rm=T)*1.2*100 > y_cg)
     {
-        y_cg = max(apply(as.matrix(read.table(paste(samplelist[i,1],"_CG.matrix.gz",sep=''),skip=1)[,7:86]),2,mean,na.rm=T))*1.2*100
+        y_cg = max(apply(as.matrix(read.table(paste(samplelist[i,1],"_CG.matrix.gz",sep=''),skip=1)[,7:86]),2,mean,na.rm=T),na.rm=T)*1.2*100
        
     }
 
-    if(max(apply(as.matrix(read.table(paste(samplelist[i,1],"_CHG.matrix.gz",sep=''),skip=1)[,7:86]),2,mean,na.rm=T))*1.2*100 > y_chg)
+    if(max(apply(as.matrix(read.table(paste(samplelist[i,1],"_CHG.matrix.gz",sep=''),skip=1)[,7:86]),2,mean,na.rm=T),na.rm=T)*1.2*100 > y_chg)
     {
-        y_chg = max(apply(as.matrix(read.table(paste(samplelist[i,1],"_CHG.matrix.gz",sep=''),skip=1)[,7:86]),2,mean,na.rm=T))*1.2*100
+        y_chg = max(apply(as.matrix(read.table(paste(samplelist[i,1],"_CHG.matrix.gz",sep=''),skip=1)[,7:86]),2,mean,na.rm=T),na.rm=T)*1.2*100
     }
 
-    if(max(apply(as.matrix(read.table(paste(samplelist[i,1],"_CHH.matrix.gz",sep=''),skip=1)[,7:86]),2,mean,na.rm=T))*1.2*100 > y_chh)
+    if(max(apply(as.matrix(read.table(paste(samplelist[i,1],"_CHH.matrix.gz",sep=''),skip=1)[,7:86]),2,mean,na.rm=T),na.rm=T)*1.2*100 > y_chh)
     {
-        y_chh = max(apply(as.matrix(read.table(paste(samplelist[i,1],"_CHH.matrix.gz",sep=''),skip=1)[,7:86]),2,mean,na.rm=T))*1.2*100
+        y_chh = max(apply(as.matrix(read.table(paste(samplelist[i,1],"_CHH.matrix.gz",sep=''),skip=1)[,7:86]),2,mean,na.rm=T),na.rm=T)*1.2*100
     }
 }
 

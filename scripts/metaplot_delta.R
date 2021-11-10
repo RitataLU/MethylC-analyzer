@@ -2,7 +2,7 @@ args = commandArgs(trailingOnly=TRUE)
 samplelist=read.table("samples_list.txt",sep='\t')
 
 
-metafile1 = read.table('metaplot_delta_CG.txt',sep='\t',header= T)
+metafile1 = read.table('metaplot_delta_CG.txt',sep='\t')
 metafile2 = read.table('metaplot_delta_CHG.txt',sep='\t')
 metafile3 = read.table('metaplot_delta_CHH.txt',sep='\t')
 
@@ -19,7 +19,6 @@ par(mar=c(2.5,4.5,2.5,2.5))
 hy_cg=ifelse(max(av)>=0, max(av)*100, max(av)*100)
 ly_cg=ifelse(min(av)>=0, min(av)*100, min(av)*100)
 
-
 if(hy_cg<2 && ly_cg>-2){
   buf_cg=0
   hy_cg=2
@@ -34,7 +33,7 @@ if(hy_cg<2 && ly_cg>-2){
   buf_cg=ceiling((abs(ly_cg)-abs(hy_cg))/10)
 }
 
-plot(NA,ylab=expression(paste(Delta,' CG methylation levels (%)')),xlab=NA,type='l',cex.main = 1,cex.axis=1.5,cex.lab=1.5,cex.lab=1.5,xlim=c(0,ncol(metafile1)),ylim=c(ly_cg-buf_cg,hy_cg+buf_cg),xaxt="n",cex=1.5,las=1)
+plot(NA,ylab=expression(paste(Delta,' CG methylation levels (%)')),xlab=NA,type='l',cex.main = 1,cex.axis=1.1,cex.lab=1.3,xlim=c(0,ncol(metafile1)),ylim=c(ly_cg-buf_cg,hy_cg+buf_cg),xaxt="n",cex=1.3,las=1)
 lines(av*100,xlab=NA,type='l',cex.main = 1,xaxt="n",cex=1.5,col= '#054C7F',lwd = 2.5)
 lines(seq(-20,length(av)),vector("numeric", length(seq(-20,length(av)))),type='h',lwd=0.5,col='black') #draw zero line
 
@@ -75,7 +74,7 @@ if(hy_chg<2 && ly_chg>-2){
   buf_chg=ceiling((abs(ly_chg)-abs(hy_chg))/10)
 }
 
-plot(NA,ylab=expression(paste(Delta,' CHG methylation levels (%)')),xlab=NA,type='l',cex.main = 1,cex.axis=1.5,cex.lab=1.5,cex.lab=1.5,xlim=c(0,ncol(metafile2)),ylim=c(ly_chg-buf_chg,hy_chg+buf_chg),xaxt="n",cex=1.5,las=1)
+plot(NA,ylab=expression(paste(Delta,' CHG methylation levels (%)')),xlab=NA,type='l',cex.main = 1,cex.axis=1.1,cex.lab=1.3,cex.lab=1.5,xlim=c(0,ncol(metafile2)),ylim=c(ly_chg-buf_chg,hy_chg+buf_chg),xaxt="n",cex=1.5,las=1)
 lines(av1*100,xlab=NA,type='l',cex.main = 1,xaxt="n",cex=1.5,col= '#054C7F',lwd = 2.5)
 lines(seq(-20,length(av1)),vector("numeric", length(seq(-20,length(av1)))),type='h',lwd=0.5,col='black') #draw zero line
 
@@ -115,7 +114,7 @@ if(hy_chh<2 && ly_chh>-2){
   buf_chh=ceiling((abs(ly_chh)-abs(hy_chh))/10)
 }
 
-plot(NA,ylab=expression(paste(Delta,' CHH methylation levels (%)')),xlab=NA,type='l',cex.main = 1,cex.axis=1.5,cex.lab=1.5,cex.lab=1.5,xlim=c(0,ncol(metafile3)),ylim=c(ly_chh-buf_chh,hy_chh+buf_chh),xaxt="n",cex=1.5,las=1)
+plot(NA,ylab=expression(paste(Delta,' CHH methylation levels (%)')),xlab=NA,type='l',cex.main = 1,cex.axis=1.1,cex.lab=1.3,cex.lab=1.5,xlim=c(0,ncol(metafile3)),ylim=c(ly_chh-buf_chh,hy_chh+buf_chh),xaxt="n",cex=1.5,las=1)
 lines(av2*100,xlab=NA,type='l',cex.main = 1,xaxt="n",cex=1.5,col= '#054C7F',lwd = 2.5)
 lines(seq(-20,length(av2)),vector("numeric", length(seq(-20,length(av2)))),type='h',lwd=0.5,col='black') #draw zero line
 
