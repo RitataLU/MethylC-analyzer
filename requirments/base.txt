@@ -7,9 +7,7 @@ conda install scipy=1.6.2
 conda install matplotlib=3.3.4
 conda install argparse
 conda install glob
-#pip install pyBigWig
-conda install pybigwig -c conda-forge -c bioconda
-conda install collections
-conda install gzip
-conda install PyQt5
-conda install seaborn=0.11.1
+pip install pyBigWig==0.3.18
+#conda install pybigwig -c conda-forge -c bioconda
+pip install PyQt5
+pip install seaborn=0.11.1
