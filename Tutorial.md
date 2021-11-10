@@ -3,11 +3,6 @@
 # Installation
 
 1. Obtain Python 3
-
-    MethylC-analyzer depends on [SAMtools](http://www.htslib.org/) and
-    [BEDtools](http://bedtools.readthedocs.org/), so please make sure you
-    already have them on your server.
-
     
 2. Recommand to create a [conda](https://docs.conda.io/en/latest/miniconda.html) environment somewhere on your disk, and then activate it.
   
