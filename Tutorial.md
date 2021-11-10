@@ -24,7 +24,7 @@
 
 
 # Run demo 
-1. go into folder named 'demo' are decompress demo.gz 
+1. go to a folder named 'Demo' where demo files are and decompress 'demo.gz' 
 
 e.g.
 ```
@@ -38,10 +38,10 @@ $ mv ../../scripts/* ./
 
 ```
 
-1.   Make a sample list and name it as "samples_list.txt" in the location where MethylC.py scripts
+1.   Make a sample list and named it as "samples_list.txt" in the location where MethylC.py scripts
 
 samples list format:
-    sample_name  CGmap_location  group (seperate with a tab)
+    sample_name  CGmap_location  group (need to seperate with a tab)
 ```    
 wt1 wt1_demo.CGmap.gz   WT
 wt2 wt2_demo.CGmap.gz   WT
