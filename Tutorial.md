@@ -20,8 +20,10 @@
 
   ```
   $ git clone https://github.com/RitataLU/MethylC-analyzer.git
-  $ sudo sh MethylC-analyzer/requirements/base.txt
+  
  ```
+4. Run MethylC-analyzer/requirements/base.txt
+ex: sudo MethylC-analyzer/requirements/base.txt
 
 
 
