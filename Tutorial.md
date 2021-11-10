@@ -25,8 +25,10 @@
 
 # Run demo 
 
+
+
 ```
-$ cd MethylC-analyzer/demo
+$ cd ../demo
 $ tar -xvf demo.gz 
 ```
 
