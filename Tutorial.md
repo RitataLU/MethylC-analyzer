@@ -13,7 +13,7 @@
   
   ```
   $ conda create -n methylC_analyzer_env anaconda python=3
-  $ conda activate methylC_analyzer_env
+  $ conda activate (Yout conda path) methylC_analyzer_env
 
  ```
 3. Download the source code and install the requirements.
