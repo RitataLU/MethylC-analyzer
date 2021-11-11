@@ -1,10 +1,10 @@
-pip install pandas==1.2.4
-pip install argparse
-pip install PyQt5
-pip install seaborn
-pip install deeptools==3.5.1
 conda install -c bioconda/label/cf201901 bedtools=2.27.1
 conda install -c bioconda bioconductor-complexheatmap
 conda install -c conda-forge r-viridis
 conda install -c r r-gplots
 conda install -c r r-ggplot2
+pip install pandas==1.2.4
+pip install deeptools==3.5.1
+pip install argparse
+pip install PyQt5
+pip install seaborn
