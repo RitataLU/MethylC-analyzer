@@ -19,7 +19,7 @@
  ```
 4. Install Package - Run MethylC-analyzer/requirements/base.txt
 
-  eg
+  e.g.
   ```  
   sh MethylC-analyzer/requirements/base.txt
   ```
