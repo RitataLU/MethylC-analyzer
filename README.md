@@ -53,27 +53,23 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 # Installation
 
 1. Obtain Python 3
-
-    MethylC-analyzer depends on [SAMtools](http://www.htslib.org/) and
-    [BEDtools](http://bedtools.readthedocs.org/), so please make sure you
-    already have them on your server.
-
     
 2. Recommand to create a [conda](https://docs.conda.io/en/latest/miniconda.html) environment somewhere on your disk, and then activate it.
   
   ```
-  $ conda create -n methylC_analyzer_env anaconda python=3
-  $ conda activate methylC_analyzer_env
+  $ conda create -n methylC_analyzer_env python=3
+  $ conda activate (Yout conda path) methylC_analyzer_env
 
  ```
 3. Download the source code and install the requirements.
 
   ```
   $ git clone https://github.com/RitataLU/MethylC-analyzer.git
-  $ sudo sh MethylC-analyzer/requirements/base.txt
+  
  ```
+4. Install Package - Run MethylC-analyzer/requirements/base.txt
 
-4. Make sure MethylC-anlyzer/scripts and input files are in the same folder
+    ex: sh MethylC-analyzer/requirements/base.txt
 
 
 
@@ -88,12 +84,12 @@ Please follow the tutorial of example use case
 samples list format:
     sample_name  CGmap_location  group (seperate with a tab)
 ```    
-wt1     ./wt1.CGmap.gz  WT
-wt2     ./wt2.CGmap.gz  WT
-wt3     ./wt3.CGmap.gz  WT
-met1_1       ./met1_1.CGmap.gz    met1
-met1_2       .met1_2.CGmap.gz     met1
-met1_3       ./met1_3.CGmap.gz    met1
+wt1     wt1.CGmap.gz  WT
+wt2     wt2.CGmap.gz  WT
+wt3     wt3.CGmap.gz  WT
+met1_1       met1_1.CGmap.gz    met1
+met1_2       met1_2.CGmap.gz     met1
+met1_3       met1_3.CGmap.gz    met1
 
 ```
 
@@ -141,17 +137,19 @@ positional arguments:
     CHH Methylation difference between maximum and minimum regions , default is 0.2
 
     -dcgc, --DMR_CG_CUTOFF <INT>
-    CG Methylation difference between 2 groups , default is 0.2
+    CG Methylation difference between 2 groups , default is 0.1
   
     -dchgc, --DMR_CHG_CUTOFF <INT>
-    CHG Methylation difference between 2 groups , default is 0.2
+    CHG Methylation difference between 2 groups , default is 0.1
     
     -dchhc, --DMR_CHH_CUTOFF <INT>
-    CHH Methylation difference between 2 groups , default is 0.2
+    CHH Methylation difference between 2 groups , default is 0.1
                         
     -b, --BIN_SIZE <INT>
     Cutoff of chrView and Metaplot:
     Seperate genome into several bins, and Size of bin, default is 1000000 bp
+    
+    -pvalue criteria for identfying DMR default is 0.05
     
     -p, --promoter <INT>
     Size of promoter, default is 2,000 bp before transcription start site
