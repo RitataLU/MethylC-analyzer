@@ -8,7 +8,7 @@
   
   ```
   $ conda create -n methylC_analyzer_env python=3.9
-  $ conda activate (Yout conda path) methylC_analyzer_env
+  $ conda activate Yout conda path methylC_analyzer_env
 
  ```
 3. Download the source code and install the requirements.
