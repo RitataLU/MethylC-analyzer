@@ -56,8 +56,7 @@ met1_2  met1_2_demo.CGmap.gz    met1
 
 **Usage:**
 ```
-$ python MethylC.py samples_list.txt TAR10_demo.gtf -d 2 -r 10 -q 2 -hcgc 0.001 -hchhc 0.001 -hchgc 0.001 -b 2000 -pvalue 0.1
-
+$ python MethylC.py samples_list.txt TAR10_demo.gtf -d 2 -r 100 -q 2 -dmrchg 0.05 -dmrcg 0.05 -dmrchh 0.05 -b 2000 -pvalue 0.1
 
 usage: MethylC.py [-h] [-d DEPTH] [-r REGION] [-q QUALIFIED] [-hcgc HEATMAP_CG_CUTOFF] [-hchgc HEATMAP_CHG_CUTOFF]
                   [-hchhc HEATMAP_CHH_CUTOFF] [-dmrcg DMR_CG_CUTOFF] [-dmrchg DMR_CHG_CUTOFF] [-dmrchh DMR_CHH_CUTOFF] [-pvalue PVALUE]
