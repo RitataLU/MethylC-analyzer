@@ -104,6 +104,8 @@ optional arguments:
     Cutoff of chrView and Metaplot:
     Seperate genome into several bins, and Size of bin, default is 1000000 bp
     
+    -pvalue criteria for identfying DMR default is 0.05
+    
     -p, --promoter <INT>
     Size of promoter, default is 2,000 bp before transcription start site
     ```
