@@ -57,8 +57,8 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 2. Recommand to create a [conda](https://docs.conda.io/en/latest/miniconda.html) environment somewhere on your disk, and then activate it.
   
   ```
-  $ conda create -n methylC_analyzer_env python=3
-  $ conda activate (Yout conda path) methylC_analyzer_env
+  $ conda create -n methylC_analyzer_env python=3.9
+  $ conda activate methylC_analyzer_env
 
  ```
 3. Download the source code and install the requirements.
