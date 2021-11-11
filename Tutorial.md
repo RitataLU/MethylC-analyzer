@@ -28,13 +28,14 @@
 
 e.g.
 ```
-$ cd ../Demo
+$ cd MethylC-analyzer/Demo
 $ tar -xvf demo.gz 
 ```
 2. Make sure all scripts and demo files are in the same foder
   e.g. move scripts in the 'MethylC-analyzer/Demo/demo'
 ```
-$ mv ../../scripts/* ./
+$ cd demo
+$ cp ../../scripts/* ./
 
 ```
 
