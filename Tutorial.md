@@ -43,7 +43,7 @@ $ cp ../../scripts/* ./
 
 1. Make a sample list and named it as "samples_list.txt" in the location where MethylC.py scripts (samples_list.txt includes in demo)
 
-## samples list format:
+**samples list format:**
 sample_name  CGmap_location  group (need to seperate with a tab)
 ```    
 wt1 wt1_demo.CGmap.gz   WT
