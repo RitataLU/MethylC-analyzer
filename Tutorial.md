@@ -7,7 +7,7 @@
 2. Recommand to create a [conda](https://docs.conda.io/en/latest/miniconda.html) environment somewhere on your disk, and then activate it.
   
   ```
-  $ conda create -n methylC_analyzer_env 
+  $ conda create -n methylC_analyzer_env python=3
   $ conda activate (Yout conda path) methylC_analyzer_env
 
  ```
@@ -19,7 +19,7 @@
  ```
 4. Install Package - Run MethylC-analyzer/requirements/base.txt
 
-    ex: sudo sh MethylC-analyzer/requirements/base.txt
+    ex: sh MethylC-analyzer/requirements/base.txt
 
 
 
