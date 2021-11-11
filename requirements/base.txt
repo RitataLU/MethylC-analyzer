@@ -1,4 +1,4 @@
-pip install pandas===1.2.4
+pip install pandas==1.2.4
 pip install argparse
 pip install PyQt5
 pip install seaborn
