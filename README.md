@@ -93,7 +93,7 @@ met1_3       met1_3.CGmap.gz    met1
 **Input:**
 1. gene annotation (GTF)
 
-2. CGmap (post-alignment data by utilizing [Bs-seeker2] (https://github.com/BSSeeker/BSseeker2) and [Bs-seeker3] (https://github.com/khuang28jhu/bs3))
+2. CGmap (post-alignment data by utilizing [Bs-seeker2](https://github.com/BSSeeker/BSseeker2) and [Bs-seeker3](https://github.com/khuang28jhu/bs3))
 
 **Usage:**
 ```
