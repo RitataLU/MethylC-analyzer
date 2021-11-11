@@ -792,5 +792,5 @@ if(Metaplot=='y'):
 else:
     pass
 
-subprocess.call('''rm *_tmpchrView.txt''',shell=True)
+
 
