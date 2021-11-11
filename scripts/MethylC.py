@@ -390,7 +390,7 @@ plt.figure(figsize=(8,6))
 # fig.set_size_inches(8,6)
 g = sns.catplot(
     data=merge2, kind="bar",
-    x="context", y= 'methylation level', hue='group', palette="dark", 
+    x="context", y= 'methyltion level', hue='group', palette="dark", 
     alpha=.6, height=6, legend = False)
 
 plt.legend(fontsize = 15, 
