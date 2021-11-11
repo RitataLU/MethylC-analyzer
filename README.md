@@ -23,7 +23,6 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 * MEM：12GB or higer (for plant sample) / 256GB or higher (for human sample)
 
 * Python 3.9
-* [SAMtools](http://www.htslib.org/)
 * [deepTools](https://deeptools.readthedocs.org/)
 * [BEDtools](http://bedtools.readthedocs.org/)
 * Python module
@@ -36,15 +35,13 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
  argparse
  glob
  pyBigWig
- collections
- gzip
- re
  PyQt5
  seaborn
 ```
 * R package
  ```
   ComplexHeatmap
+  gplots
   ggplot2
   viridus
  ```
