@@ -22,7 +22,7 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 
 * MEM：12GB or higer (for plant sample) / 256GB or higher (for human sample)
 
-* Python 3.9
+* Python 3.9 and R>3.6
 * [deepTools](https://deeptools.readthedocs.org/)
 * [BEDtools](http://bedtools.readthedocs.org/)
 * Python module
