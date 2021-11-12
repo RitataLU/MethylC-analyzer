@@ -390,7 +390,7 @@ plt.figure(figsize=(8,6))
 # fig.set_size_inches(8,6)
 g = sns.catplot(
     data=merge2, kind="bar",
-    x="context", y= 'methyltion level', hue='group', palette="dark", 
+    x="context", y= 'methylation level', hue='group', palette="dark", 
     alpha=.6, height=6, legend = False)
 
 plt.legend(fontsize = 15, 
@@ -407,7 +407,7 @@ for p in ax.patches:
             rotation='horizontal', 
             size='x-small')
 
-g.set_axis_labels("", "Methylaiton level (%)")
+g.set_axis_labels("", "Methylation level (%)")
 mpl.rcParams['pdf.fonttype'] = 42
 mpl.rcParams['ps.fonttype'] = 42
 mpl.rcParams["axes.labelsize"] = 40
@@ -589,7 +589,7 @@ if(DMG=='y'):
     dmg('CHH',"DMR_CHH_hyper_"+str(dmr_CHH_cut)+".txt.bed",'hyper', dmr_CHH_cut)
     dmg('CHH',"DMR_CHH_hypo_"+str(dmr_CHH_cut)+".txt.bed", 'hypo',dmr_CHH_cut)
 
-    DMR_DMGPlot('CG',str(dmr_CG_cut))
+    DMR_DMGPlot('CG', dmr_CG_cut))
     DMR_DMGPlot('CHG',dmr_CHG_cut)
     DMR_DMGPlot('CHH',dmr_CHH_cut)
 
