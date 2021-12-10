@@ -2,7 +2,7 @@
 
 # Installation
 
-1. Obtain Python 3.9
+1. Obtain Python 3.9 and R>3.6
     
 2. Recommand to create a [conda](https://docs.conda.io/en/latest/miniconda.html) environment somewhere on your disk, and then activate it.
   
