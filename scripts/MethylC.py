@@ -589,7 +589,7 @@ if(DMG=='y'):
     dmg('CHH',"DMR_CHH_hyper_"+str(dmr_CHH_cut)+".txt.bed",'hyper', dmr_CHH_cut)
     dmg('CHH',"DMR_CHH_hypo_"+str(dmr_CHH_cut)+".txt.bed", 'hypo',dmr_CHH_cut)
 
-    DMR_DMGPlot('CG', dmr_CG_cut))
+    DMR_DMGPlot('CG', dmr_CG_cut )
     DMR_DMGPlot('CHG',dmr_CHG_cut)
     DMR_DMGPlot('CHH',dmr_CHH_cut)
 
