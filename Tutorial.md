@@ -1,5 +1,35 @@
 # Tutorial
 
+
+# <a name="SystemRequirements"></a>System Requirements
+* Linux or Mac OS Environment
+* CPU：No special restrictions, but CPU has 16 cores is more efficient
+
+* MEM：12GB or higer (for plant sample) / 256GB or higher (for human sample)
+
+* Python 3.9 and R>3.6
+* [deepTools](https://deeptools.readthedocs.org/)
+* [BEDtools](http://bedtools.readthedocs.org/)
+* Python module
+```
+ numpy
+ pandas
+ math
+ scipy
+ matplolib
+ argparse
+ glob
+ pyBigWig
+ PyQt5
+ seaborn
+```
+* R package
+ ```
+  ComplexHeatmap
+  gplots
+  ggplot2
+  viridus
+ ```
 # Installation
 
 1. Obtain Python 3.9 and R>3.6
