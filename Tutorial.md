@@ -28,13 +28,11 @@
   ComplexHeatmap
   gplots
   ggplot2
-  viridus
+  viridis
  ```
 # Installation
-
-1. Obtain Python 3.9 and R>3.6
-    
-2. Recommand to create a [conda](https://docs.conda.io/en/latest/miniconda.html) environment somewhere on your disk, and then activate it.
+   
+1. Recommand to create a [conda](https://docs.conda.io/en/latest/miniconda.html) environment somewhere on your disk, and then activate it.
   
   ```
   $ conda create -n methylC_analyzer_env python=3.9
