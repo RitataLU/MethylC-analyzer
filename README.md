@@ -96,7 +96,7 @@ Input format:
  -f {bismark,bsmap,methylpy,methimpute}, --format {bismark,bsmap,methylpy,methimpute}
                        the type of file to CGmap
 ```
->> Example for comverting methylation calls to CGmap.gz:
+>> Example for converting methylation calls to CGmap.gz:
 
 ```
 # bismark to CGmap.gz
@@ -116,8 +116,9 @@ Please follow the tutorial of example use case
 
 1.   Make a sample list and name it as "samples_list.txt" in the location where methylc.py script
 
-samples list format (tab-separated)
-    sample_name  CGmap_location  group 
+> Sample Description File (tab-delimited)
+Sample list (header: sample_name  CGmap_location  group )
+
 ```    
 wt1     wt1.CGmap.gz  WT
 wt2     wt2.CGmap.gz  WT
