@@ -43,7 +43,7 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
   ComplexHeatmap
   gplots
   ggplot2
-  viridus
+  viridis
  ```
 
 
