@@ -116,8 +116,8 @@ Please follow the tutorial of example use case
 
 1.   Make a sample list and name it as "samples_list.txt" in the location where methylc.py script
 
-> Sample Description File (tab-delimited)
-Sample list (header: sample_name  CGmap_location  group )
+> Sample Description File (tab-delimited, no header in the first line)
+Sample list ( sample_name  CGmap_location  group )
 
 ```    
 wt1     wt1.CGmap.gz  WT
