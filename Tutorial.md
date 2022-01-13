@@ -69,10 +69,15 @@ $ cp ../../scripts/* ./
 
 ```
 
-1. Make a sample list and named it as "samples_list.txt" in the location where MethylC.py scripts (samples_list.txt includes in demo)
+
+1. Make a sample description file and name it as "samples_list.txt" in the location where methylc.py script. The file should be tab-delimited without a header.
+
+> Sample Description File (tab-delimited, no header in the first line)
+Sample list ( sample_name  CGmap_location  group )
+
 
 **samples list format:**
-sample_name  CGmap_location  group (need to seperate with a tab)
+>> sample_name  CGmap_location  group (tab-delimited, no header in the first line)
 ```    
 wt1 wt1_demo.CGmap.gz   WT
 wt2 wt2_demo.CGmap.gz   WT
