@@ -59,10 +59,14 @@
 $ wget https://paoyang.ipmb.sinica.edu.tw/MethylC-analyzer/Demo.tar.gz
 $ tar -xvf Demo.tar.gz
 ```
-> Demo contains 4 CGmap, GTF file and Samples_list.txt
+> Demo contains 4 CGmap, one Samples_list.txt and one GTF file
 ```
-CGmap.gz
-Samples_list.txt
+WT1s.CGmap.gz
+WT2s.CGmap.gz
+MT1s.CGmap.gz
+MT2s.CGmap.gz
+samples_list.txt
+TAR10_2_demo.gtf
 
 ```
 2. Make sure all scripts and all demo files are in the same foder
@@ -70,7 +74,7 @@ Samples_list.txt
 > e.g. move scripts in the 'MethylC-analyzer/Demo'
 ```
 $ cd Demo
-$ cp ../../scripts/* ./
+$ cp ../scripts/* ./
 
 ```
 
