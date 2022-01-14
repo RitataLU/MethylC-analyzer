@@ -53,7 +53,7 @@
   ```
 
 # Run demo 
-1. Download [Demo] (https://paoyang.ipmb.sinica.edu.tw/MethylC-analyzer/Demo.tar.gz) files and decompress 'Demo.tar.gz' file
+1. Download [Demo](https://paoyang.ipmb.sinica.edu.tw/MethylC-analyzer/Demo.tar.gz) files and decompress 'Demo.tar.gz' file
 
 ```
 $ wget https://paoyang.ipmb.sinica.edu.tw/MethylC-analyzer/Demo.tar.gz
