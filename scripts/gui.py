@@ -382,7 +382,7 @@ class RunThread(qc.QThread):
             self.state.emit('Setting Parameters')
             
             depth=int(w.tbn1.text()) #number of C+T
-            region=int(w.tbn2.text()
+            region=int(w.tbn2.text())
             qualifiedSite =int(w.tbn3.text()) #number of least valid region count
             pca_heat_cg_cut=float(w.tbn_heatcg.text()) #heatmap least valid max-min to display
             pca_heat_chh_cut=float(w.tbn_heatchh.text()) #heatmap least valid max-min to display
