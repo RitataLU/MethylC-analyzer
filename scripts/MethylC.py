@@ -30,8 +30,8 @@ from scipy import stats
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-a",help="Name of control group",dest='group1',default='')
-parser.add_argument("-b",help="Name of experimental group",dest='group2',default='')
+parser.add_argument("-a",help="Name of experimental group",dest='group1',default='')
+parser.add_argument("-b",help="Name of control group",dest='group2',default='')
 parser.add_argument("-d",help="Minimum depth of sites. Default=4",dest='depth',default=4)
 parser.add_argument("-r",help="Size of region. Default=500",dest='region',default=500)
 parser.add_argument("-q",help="Minimum sites within a region. Default=4",dest='qualified',default=4)
