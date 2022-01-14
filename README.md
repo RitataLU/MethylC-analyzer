@@ -120,13 +120,14 @@ Please follow the tutorial of example use case
 > Sample Description File (tab-delimited, no header in the first line)
 Sample list ( sample_name  CGmap_location  group )
 
-```    
-wt1     wt1.CGmap.gz  WT
-wt2     wt2.CGmap.gz  WT
-wt3     wt3.CGmap.gz  WT
-met1_1       met1_1.CGmap.gz    met1
-met1_2       met1_2.CGmap.gz     met1
-met1_3       met1_3.CGmap.gz    met1
+```
+
+wt1	wt1.CGmap.gz	WT
+wt2	wt2.CGmap.gz	WT
+wt3	wt3.CGmap.gz	WT
+met1_1	met1_1.CGmap.gz	met1
+met1_2	met1_2.CGmap.gz	met1
+met1_3	met1_3.CGmap.gz	met1
 
 ```
 
