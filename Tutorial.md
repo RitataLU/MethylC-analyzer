@@ -92,7 +92,7 @@ WT2     WT2s.CGmap.gz   WT
 
 **Usage:**
 ```
-$ python MethylC.py samples_list.txt TAR10_2_demo.gtf -a WT -b MT -d 4 -r 200 -q 2 -bs 200000 -pvalue 0.1
+$ python MethylC.py samples_list.txt TAR10_2_demo.gtf -a MT -b WT -d 4 -r 200 -q 2 -bs 200000 -pvalue 0.1
 
 usage: MethylC_new.py [-h] [-a GROUP1] [-b GROUP2] [-d DEPTH] [-r REGION]
                       [-q QUALIFIED] [-context CONTEXT] [-hc HEATMAP_CUTOFF]
@@ -106,8 +106,8 @@ positional arguments:
 
 optional arguments:
   -h, --help          show this help message and exit
-  -a GROUP1           Name of control group
-  -b GROUP2           Name of experimental group
+  -a GROUP1           Name of experimental group
+  -b GROUP2           Name of control group
   -d DEPTH            Minimum depth of sites. Default=4
   -r REGION           Size of region. Default=500
   -q QUALIFIED        Minimum sites within a region. Default=4
