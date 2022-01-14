@@ -68,6 +68,8 @@ $ cd demo
 $ cp ../../scripts/* ./
 
 ```
+3. Download demo CG map files 
+> 
 
 
 1. Make a sample description file and name it as "samples_list.txt" in the location where methylc.py script. The file should be tab-delimited without a header.
@@ -79,70 +81,45 @@ Sample list ( sample_name  CGmap_location  group )
 **samples list format:**
 >> sample_name  CGmap_location  group (tab-delimited, no header in the first line)
 ```    
-wt1 wt1_demo.CGmap.gz   WT
-wt2 wt2_demo.CGmap.gz   WT
-met1_1  met1_1_demo.CGmap.gz    met1
-met1_2  met1_2_demo.CGmap.gz    met1
+MT1     MT1s.CGmap.gz   MT
+MT2     MT2s.CGmap.gz   MT
+WT1     WT1s.CGmap.gz   WT
+WT2     WT2s.CGmap.gz   WT
 ```
 
 **Input:**
 1. gene annotation (GTF)
 
-2. CGmap (post-alignment data by utilizing Bsseeker2)
+2. CGmap 
 
 **Usage:**
 ```
 $ python MethylC.py samples_list.txt TAR10_2_demo.gtf -a WT -b MT -d 4 -r 200 -q 2 -bs 200000 -pvalue 0.1
 
-usage: MethylC.py [-h] [-d DEPTH] [-r REGION] [-q QUALIFIED] [-hcgc HEATMAP_CG_CUTOFF] [-hchgc HEATMAP_CHG_CUTOFF]
-                  [-hchhc HEATMAP_CHH_CUTOFF] [-dmrcg DMR_CG_CUTOFF] [-dmrchg DMR_CHG_CUTOFF] [-dmrchh DMR_CHH_CUTOFF] [-pvalue PVALUE]
-                  [-b BIN_SIZE] [-p PROMOTER_SIZE]
-                  samples_list input_gtf_file
+usage: MethylC_new.py [-h] [-a GROUP1] [-b GROUP2] [-d DEPTH] [-r REGION]
+                      [-q QUALIFIED] [-context CONTEXT] [-hc HEATMAP_CUTOFF]
+                      [-dmrc DMR_CUTOFF] [-test TESTMETHOD] [-pvalue PVALUE]
+                      [-bs BIN_SIZE] [-p PROMOTER_SIZE]
+                      samples_list input_gtf_file
 
 positional arguments:
-  samples_list          samples CGmap description
-  input_gtf_file        path of gene annotation
+  samples_list        samples CGmap description
+  input_gtf_file      path of gene annotation
 
 optional arguments:
-
-    -d, --DEPTH <INT> 
-    minimum sites of methlated cytosine and unmethylated cytosine, default is 4
-    
-    -r, --REGION <INT>  
-    size of region, default is 500 bp
-    
-    -q, --QUAIFIED <INT>
-    qulified sites within a region, default is 4
-    
-    -hcgc, --HEATMAP_CG_CUTOFF <INT>
-    PCA and Heatmap cutoff:
-    CG Methylation difference between maximum and minimum regions , default is 0.2
-    
-    -hchgc, --HEATMAP_CHG_CUTOFF<INT>
-    PCA and Heatmap cutoff:
-    CHG Methylation difference between maximum and minimum regions , default is 0.2
-    
-    -hchhc, --HEATMAP_CHH_CUTOFF <INT>
-    PCA and Heatmap cutoff:
-    CHH Methylation difference between maximum and minimum regions , default is 0.2
-
-    -dcgc, --DMR_CG_CUTOFF <INT>
-    CG Methylation difference between 2 groups , default is 0.1
-  
-    -dchgc, --DMR_CHG_CUTOFF <INT>
-    CHG Methylation difference between 2 groups , default is 0.1
-    
-    -dchhc, --DMR_CHH_CUTOFF <INT>
-    CHH Methylation difference between 2 groups , default is 0.1
-                        
-    -b, --BIN_SIZE <INT>
-    Cutoff of chrView and Metaplot:
-    Seperate genome into several bins, and Size of bin, default is 1000000 bp
-    
-    -pvalue criteria for identfying DMR default is 0.05
-    
-    -p, --promoter <INT>
-    Size of promoter, default is 2,000 bp before transcription start site
+  -h, --help          show this help message and exit
+  -a GROUP1           Name of group1
+  -b GROUP2           Name of group2
+  -d DEPTH            Minimum depth of sites. Default=4
+  -r REGION           Size of region. Default=500
+  -q QUALIFIED        Minimum sites within a region. Default=4
+  -context CONTEXT    Context used. Default=CG
+  -hc HEATMAP_CUTOFF  Methylation cutoff of PCA & Heatmap. Default = 0.2
+  -dmrc DMR_CUTOFF    Methylation cutoff of DMR. Default = 0.1
+  -test TESTMETHOD    DMR testing method. 0:TTest, 1:KS, 2:MWU. Default=0
+  -pvalue PVALUE      p-value cutoff for identifying DMR. Default = 0.05
+  -bs BIN_SIZE        Bin size of chrView and Metaplot. Default = 1000000
+  -p PROMOTER_SIZE    promoter_size
     ```
 
 ** activate interface (choose analysis want to process)
@@ -153,7 +130,8 @@ Identify DMG?  (y/n): y
 Use Fold Enrichment Analysis?  (y/n): y
 Chromosome View Analysis?  (y/n): y
 Metaplot Analysis?  (y/n): y
-enter experimental group name analysis: met1
+
+enter experimental group name analysis: MT
 enter control group name analysis: WT
 ```
 **Output Figures**
