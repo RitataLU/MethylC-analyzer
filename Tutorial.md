@@ -126,7 +126,6 @@ optional arguments:
 
 ** activate interface (choose analysis want to process)
 
-```
 Heatmap & PCA Analysis?  (y/n): y
 Identify DMR?  (y/n): y
 Identify DMG?  (y/n): y
