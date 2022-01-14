@@ -84,7 +84,7 @@ chr1    G       13545   CHH     CA      0.0     0       8
 
 ```
 usage: methcalls2CGmap.py [-h] [-n FILENAME]
-                         [-f {bismark,bsmap,methylpy,methimpute}]
+                         [-f {bismark,bsmap,methimpute}]
 
 optional arguments:
  -h, --help            show this help message and exit
@@ -93,7 +93,7 @@ Input format:
  -n FILENAME, --filename FILENAME
                        the file name that the users want to convert to CGMap
                        format
- -f {bismark,bsmap,methylpy,methimpute}, --format {bismark,bsmap,methylpy,methimpute}
+ -f {bismark,bsmap,methimpute}, --format {bismark,bsmap,methimpute}
                        the type of file to CGmap
 ```
 >> Example for converting methylation calls to CGmap.gz:
@@ -101,6 +101,7 @@ Input format:
 ```
 # bismark to CGmap.gz
 python methcalls2CGmap.py -n CX_report.txt.gz -f bismark
+
 ```
 
 2.Gene annotation (GTF)
@@ -135,56 +136,33 @@ met1_3       met1_3.CGmap.gz    met1
 $ python MethylC.py samples_list.txt TAR10.genes.gtf 
 
 
-usage: MethylC.py [-h] [-d DEPTH] [-r REGION] [-q QUALIFIED] [-hcgc HEATMAP_CG_CUTOFF] [-hchgc HEATMAP_CHG_CUTOFF]
-                  [-hchhc HEATMAP_CHH_CUTOFF] [-dmrcg DMR_CG_CUTOFF] [-dmrchg DMR_CHG_CUTOFF] [-dmrchh DMR_CHH_CUTOFF] [-pvalue PVALUE]
-                  [-b BIN_SIZE] [-p PROMOTER_SIZE]
-                  samples_list input_gtf_file
+usage: MethylC_new.py [-h] [-a GROUP1] [-b GROUP2] [-d DEPTH] [-r REGION]
+                      [-q QUALIFIED] [-context CONTEXT] [-hc HEATMAP_CUTOFF]
+                      [-dmrc DMR_CUTOFF] [-test TESTMETHOD] [-pvalue PVALUE]
+                      [-bs BIN_SIZE] [-p PROMOTER_SIZE]
+                      samples_list input_gtf_file
 
 positional arguments:
-  samples_list          samples CGmap description
-  input_gtf_file        path of gene annotation
+  samples_list        samples CGmap description
+  input_gtf_file      path of gene annotation
+
   
   ```
   
   ## Arguments
-    -d, --DEPTH <INT> 
-    minimum sites of methlated cytosine and unmethylated cytosine, default is 4
-    
-    -r, --REGION <INT>  
-    size of region, default is 500 bp
-    
-    -q, --QUAIFIED <INT>
-    qulified sites within a region, default is 4
-    
-    -hcgc, --HEATMAP_CG_CUTOFF <INT>
-    PCA and Heatmap cutoff:
-    CG Methylation difference between maximum and minimum regions , default is 0.2
-    
-    -hchgc, --HEATMAP_CHG_CUTOFF<INT>
-    PCA and Heatmap cutoff:
-    CHG Methylation difference between maximum and minimum regions , default is 0.2
-    
-    -hchhc, --HEATMAP_CHH_CUTOFF <INT>
-    PCA and Heatmap cutoff:
-    CHH Methylation difference between maximum and minimum regions , default is 0.2
-
-    -dcgc, --DMR_CG_CUTOFF <INT>
-    CG Methylation difference between 2 groups , default is 0.1
-  
-    -dchgc, --DMR_CHG_CUTOFF <INT>
-    CHG Methylation difference between 2 groups , default is 0.1
-    
-    -dchhc, --DMR_CHH_CUTOFF <INT>
-    CHH Methylation difference between 2 groups , default is 0.1
-                        
-    -b, --BIN_SIZE <INT>
-    Cutoff of chrView and Metaplot:
-    Seperate genome into several bins, and Size of bin, default is 1000000 bp
-    
-    -pvalue criteria for identfying DMR default is 0.05
-    
-    -p, --promoter <INT>
-    Size of promoter, default is 2,000 bp before transcription start site
+  -h, --help          show this help message and exit
+  -a GROUP1           Name of group1
+  -b GROUP2           Name of group2
+  -d DEPTH            Minimum depth of sites. Default=4
+  -r REGION           Size of region. Default=500
+  -q QUALIFIED        Minimum sites within a region. Default=4
+  -context CONTEXT    Context used. Default=CG
+  -hc HEATMAP_CUTOFF  Methylation cutoff of PCA & Heatmap. Default = 0.2
+  -dmrc DMR_CUTOFF    Methylation cutoff of DMR. Default = 0.1
+  -test TESTMETHOD    DMR testing method. 0:TTest, 1:KS, 2:MWU. Default=0
+  -pvalue PVALUE      p-value cutoff for identifying DMR. Default = 0.05
+  -bs BIN_SIZE        Bin size of chrView and Metaplot. Default = 1000000
+  -p PROMOTER_SIZE    promoter_size
     ```
 
 ** activate interface (Users select analysis that want to process)
