@@ -52,27 +52,29 @@
   sh MethylC-analyzer/requirements/base.txt
   ```
 
-
 # Run demo 
-1. go to a folder named 'Demo' where demo files are and decompress 'demo.gz' 
+1. Download [Demo] (https://paoyang.ipmb.sinica.edu.tw/MethylC-analyzer/Demo.tar.gz) files and decompress 'Demo.tar.gz' file
 
-e.g.
 ```
-$ cd MethylC-analyzer/Demo
-$ tar -xvf demo.gz 
+$ wget https://paoyang.ipmb.sinica.edu.tw/MethylC-analyzer/Demo.tar.gz
+$ tar -xvf Demo.tar.gz
 ```
-2. Make sure all scripts and demo files are in the same foder
-  e.g. move scripts in the 'MethylC-analyzer/Demo/demo'
+> Demo contains 4 CGmap, GTF file and Samples_list.txt
 ```
-$ cd demo
+CGmap.gz
+Samples_list.txt
+
+```
+2. Make sure all scripts and all demo files are in the same foder
+
+> e.g. move scripts in the 'MethylC-analyzer/Demo'
+```
+$ cd Demo
 $ cp ../../scripts/* ./
 
 ```
-3. Download demo CG map files 
-> 
 
-
-1. Make a sample description file and name it as "samples_list.txt" in the location where methylc.py script. The file should be tab-delimited without a header.
+1. A sample description file "samples_list.txt" provides in Demo. The file is tab-delimited without a header.
 
 > Sample Description File (sample_name  CGmap_location  group (tab-delimited, no header in the first line)
 
@@ -86,7 +88,7 @@ WT2     WT2s.CGmap.gz   WT
 **Input:**
 1. gene annotation (GTF)
 
-2. CGmap 
+2. samples_list.txt (description file, tab-delimited)
 
 **Usage:**
 ```
@@ -104,8 +106,8 @@ positional arguments:
 
 optional arguments:
   -h, --help          show this help message and exit
-  -a GROUP1           Name of group1
-  -b GROUP2           Name of group2
+  -a GROUP1           Name of control group
+  -b GROUP2           Name of experimental group
   -d DEPTH            Minimum depth of sites. Default=4
   -r REGION           Size of region. Default=500
   -q QUALIFIED        Minimum sites within a region. Default=4
