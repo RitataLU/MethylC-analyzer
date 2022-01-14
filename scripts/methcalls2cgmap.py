@@ -14,7 +14,7 @@ def get_parser():
     parser = argparse.ArgumentParser()
     group1 = parser.add_argument_group('Input format')
     group1.add_argument("-n", "--filename", type=str, help="the file name that the users want to convert to CGMap format")
-    group1.add_argument("-f", "--format", default="bismark",choices=["bismark", "bsmap", "methylpy", "methimpute"], type=str, help="the type of file to CGmap")
+    group1.add_argument("-f", "--format", default="bismark",choices=["bismark", "bsmap", "methimpute"], type=str, help="the type of file to CGmap")
     return parser
 
 
@@ -90,22 +90,6 @@ def bsmap2cgmap(bsmapfile):
 
 
 
-def methylpy2cgmap(methylpyfile):
-	"""
-	the allc files by methylpy to CGmap.gz
-	"""
-	name_methylpy = methylpyfile
-	methylpy = readfile(name_methylpy)
-	methylpy["nuc"] = np.where(methylpy[2]=="+","C","G")
-	methylpy["dinuc"] = [i[:2] for i in list(methylpy[3])]
-	methylpy["context"] = methylpy[3].apply(trinuc)
-	methylpy["ratio"] = np.round(methylpy[4].astype("float")/methylpy[5].astype("float"),2)
-	cgmap_format = methylpy[[0,"nuc",1,"context","dinuc","ratio",4,5]]
-	cgmap_format_finish = cgmap_format.loc[(cgmap_format[5]!=0)]
-	cgmap_format_finish.to_csv(name_methylpy + ".CGmap.gz", header = False, index = False, sep="\t", compression='gzip')
-
-
-
 def methimpute2cgmap(methimputefile):
 	"""
 	TSV files exported from the methimpute to CGmap.gz
@@ -130,8 +114,6 @@ def main():
 			bismark2cgmap(args.filename)
 		if args.format == "bsmap":
 			bsmap2cgmap(args.filename)
-		if args.format == "methylpy":
-			methylpy2cgmap(args.filename)
 		if args.format =="methimpute":
 			methimpute2cgmap(args.filename)
 	except Exception as e:

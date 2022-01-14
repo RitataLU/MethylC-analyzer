@@ -1,21 +1,22 @@
+# 2022.01.13
+
 import sys
 import subprocess, sys
 import pandas as pd
 import numpy as np
-import seaborn as sns
+#import seaborn as sns
 import os
-import matplotlib
-if os.environ.get('DISPLAY','') == '':
-    print('no display found. Using non-interactive Agg backend')
-    matplotlib.use('Agg')
+import random
+#import matplotlib
+#if os.environ.get('DISPLAY','') == '':
+#    print('no display found. Using non-interactive Agg backend')
+#    matplotlib.use('Agg')
 
-import matplotlib.pyplot as plt
-
-
-from matplotlib import rcParams
-import matplotlib as mpl
-matplotlib.rcParams['pdf.fonttype'] = 42
-matplotlib.rcParams['ps.fonttype'] = 42
+#import matplotlib.pyplot as plt
+#from matplotlib import rcParams
+#import matplotlib as mpl
+#matplotlib.rcParams['pdf.fonttype'] = 42
+#matplotlib.rcParams['ps.fonttype'] = 42
 import math
 from math import log
 from scipy import stats
@@ -26,22 +27,27 @@ import glob
 import pyBigWig
 from scipy.stats import rankdata
 from scipy import stats
-import os
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-d",help="min site of #C+#T",dest='depth',default=4)
-parser.add_argument("-r",help="size of region",dest='region',default=500)
-parser.add_argument("-q",help="qualified site within a region",dest='qualified',default=4)
-parser.add_argument("-hcgc",help="PCA & Heatmap_CG_cutoff",dest='heatmap_cg_cutoff',default=0.2)
-parser.add_argument("-hchgc",help="PCA & Heatmap_CHG_cutoff",dest='heatmap_chg_cutoff',default=0.2)
-parser.add_argument("-hchhc",help="PCA & Heatmap_CHH_cutoff",dest='heatmap_chh_cutoff',default=0.2)
-parser.add_argument("-dmrcg",help="DMR_CG_cutoff",dest='dmr_cg_cutoff',default=0.1)
-parser.add_argument("-dmrchg",help="DMR_CHG_cutoff",dest='dmr_chg_cutoff',default=0.1)
-parser.add_argument("-dmrchh",help="DMR_CHH_cutoff",dest='dmr_chh_cutoff',default=0.1)
-parser.add_argument("-pvalue",help="p-value for identifying DMR",dest='pvalue',default=0.05)
+parser.add_argument("-a",help="Name of group1",dest='group1',default='')
+parser.add_argument("-b",help="Name of group2",dest='group2',default='')
+parser.add_argument("-d",help="Minimum depth of sites. Default=4",dest='depth',default=4)
+parser.add_argument("-r",help="Size of region. Default=500",dest='region',default=500)
+parser.add_argument("-q",help="Minimum sites within a region. Default=4",dest='qualified',default=4)
+parser.add_argument("-context",help="Context used. Default=CG",dest='context',default='CG')
+parser.add_argument("-hc",help="Methylation cutoff of PCA & Heatmap. Default = 0.2",dest='heatmap_cutoff',default=0.2)
+#parser.add_argument("-hcgc",help="PCA & Heatmap_CG_cutoff",dest='heatmap_cg_cutoff',default=0.2)
+#parser.add_argument("-hchgc",help="PCA & Heatmap_CHG_cutoff",dest='heatmap_chg_cutoff',default=0.2)
+#parser.add_argument("-hchhc",help="PCA & Heatmap_CHH_cutoff",dest='heatmap_chh_cutoff',default=0.2)
+parser.add_argument("-dmrc",help="Methylation cutoff of DMR. Default = 0.1",dest='dmr_cutoff',default=0.1)
+#parser.add_argument("-dmrcg",help="DMR_CG_cutoff",dest='dmr_cg_cutoff',default=0.1)
+#parser.add_argument("-dmrchg",help="DMR_CHG_cutoff",dest='dmr_chg_cutoff',default=0.1)
+#parser.add_argument("-dmrchh",help="DMR_CHH_cutoff",dest='dmr_chh_cutoff',default=0.1)
+parser.add_argument("-test",help="DMR testing method. 0:TTest, 1:KS, 2:MWU. Default=0",dest='testMethod',default=0)
+parser.add_argument("-pvalue",help="p-value cutoff for identifying DMR. Default = 0.05",dest='pvalue',default=0.05)
 #parser.add_argument("-fdr",help="fdr for identifying DMR",dest='fdr',default=0.05)
-parser.add_argument("-b",help="resolution of chrView and Metaplot",dest='bin_size',default=1000000)
+parser.add_argument("-bs",help="Bin size of chrView and Metaplot. Default = 1000000",dest='bin_size',default=1000000)
 parser.add_argument("-p",help="promoter_size",dest='promoter_size',default=2000)
 parser.add_argument("samples_list",help="samples CGmap description")
 parser.add_argument("input_gtf_file",help="path of gene annotation")
@@ -52,13 +58,17 @@ args = parser.parse_args()
 depth=int(args.depth)
 region=int(args.region)
 qualifiedSite=int(args.qualified)
-pca_heat_cg_cut=float(args.heatmap_cg_cutoff)
-pca_heat_chh_cut=float(args.heatmap_chh_cutoff)
-pca_heat_chg_cut=float(args.heatmap_chg_cutoff)
-dmr_CG_cut=float(args.dmr_cg_cutoff)
-dmr_CHH_cut=float(args.dmr_chh_cutoff)
-dmr_CHG_cut=float(args.dmr_chg_cutoff)
+pca_heat_cut=float(args.heatmap_cutoff)
+#pca_heat_cg_cut=float(args.heatmap_cg_cutoff)
+#pca_heat_chh_cut=float(args.heatmap_chh_cutoff)
+#pca_heat_chg_cut=float(args.heatmap_chg_cutoff)
+dmr_cut=float(args.dmr_cutoff)
+#dmr_CG_cut=float(args.dmr_cg_cutoff)
+#dmr_CHH_cut=float(args.dmr_chh_cutoff)
+#dmr_CHG_cut=float(args.dmr_chg_cutoff)
 pvalue = float(args.pvalue)
+testmethod = int(args.testMethod)
+context = args.context.upper() if args.context.upper() in ['CG','CHG','CHH'] else 'CG'
 #fdr = float(args.fdr)
 binSize=int(args.bin_size)
 promoter_size=int(args.promoter_size)
@@ -67,15 +77,16 @@ samples_list=str(args.samples_list)
 input_gtf_file=str(args.input_gtf_file)
 input_gene_name=input_gtf_file
 #Choose Tools
-Heatmap_PCA=input('Heatmap & PCA Analysis?  (y/n): ')
-DMR=input('Identify DMR?  (y/n): ')
-DMG=input('Identify DMG?  (y/n): ')
-Fold_Enrichment=input('Use Fold Enrichment Analysis?  (y/n): ')
-ChrView=input('Chromosome View Analysis?  (y/n): ')
-Metaplot=input('Metaplot Analysis?  (y/n): ')
-DMR_exp=str(input('enter experimental group name analysis: '))
-DMR_ctrl=str(input('enter control group name analysis: '))
-
+Heatmap_PCA=input('Heatmap & PCA Analysis?  ([y]/n): ') or 'y'
+DMR=input('Identify DMR?  ([y]/n): ') or 'y'
+DMG=input('Identify DMG?  ([y]/n): ') or 'y'
+Fold_Enrichment=input('Use Fold Enrichment Analysis?  ([y]/n): ') or 'y'
+ChrView=input('Chromosome View Analysis?  ([y]/n): ') or 'y'
+Metaplot=input('Metaplot Analysis?  ([y]/n): ') or 'y'
+#DMR_exp=str(input('enter experimental group name analysis: '))
+#DMR_ctrl=str(input('enter control group name analysis: '))
+DMR_exp=args.group1
+DMR_ctrl=args.group2
 
 #all functions
 #transfer txt to bed
@@ -83,50 +94,86 @@ DMR_ctrl=str(input('enter control group name analysis: '))
 #     df = pd.read_csv("CommonRegion_"+context+".txt",sep="\t")
 
 def bed_form(inputxt):
-    
-
     subprocess.call('''awk '{if (NR!=1) print $1"\t"$2"\t"$3}' %s > %s'''%(inputxt, inputxt+".bed"), shell=True)
     return inputxt+".bed"
 
-def Find_DMR(context, cutoff):
-    file1=pd.read_csv("CommonRegion_"+context+".txt",sep="\t",dtype =
-            {0:str,1:int,2:int},index_col=[0,1,2])
-    # set types for each coulmn 
-    #file1.iloc[:,0] = str(file1.iloc[:,0])
-    #file1.iloc[:,1:3] = file1.iloc[:,1:3].astype(int)
-    #add small value (0.001) to prevent meth_level is 0 for statistics (ttest)
-    file1.iloc[:,0] = file1.iloc[:,0:].astype(float)+0.0001 
-    file1.iloc[:,file1.shape[1]-1] = file1.iloc[:,file1.shape[1]-1].astype(float)+0.0001 
+# def Find_DMR(context, cutoff):
+#     file1=pd.read_csv("CommonRegion_"+context+".txt",sep="\t",dtype =
+#             {0:str,1:int,2:int},index_col=[0,1,2])
+#     # set types for each coulmn 
+#     #file1.iloc[:,0] = str(file1.iloc[:,0])
+#     #file1.iloc[:,1:3] = file1.iloc[:,1:3].astype(int)
+#     #add small value (0.001) to prevent meth_level is 0 for statistics (ttest)
+#     file1.iloc[:,0] = file1.iloc[:,0:].astype(float)+0.0001 
+#     file1.iloc[:,file1.shape[1]-1] = file1.iloc[:,file1.shape[1]-1].astype(float)+0.0001 
 
-    PVALUE =[]
-    for i in file1.index:
-        expGp = file1.loc[i,expgroup].dropna()
-        ctrlGp = file1.loc[i,ctrlgroup].dropna()
-        #first 3 columns 
-        # file1_col3 = file1.iloc[i,0:3]
-        # file1_col3_df = pd.DataFrame(file1_col3).T
-        Delta = expGp.mean()-ctrlGp.mean()
-        pval =  stats.ttest_ind(expGp , ctrlGp)[1]
-        p = pd.concat([pd.DataFrame(expGp),pd.DataFrame(ctrlGp)]).T
-        #p = pd.merge(file1_col3_df, p, left_index = True, right_index = True)
-        p['Delta'] = Delta
-        p['pval'] = pval
-        PVALUE.append(p)
+#     PVALUE =[]
+#     for i in file1.index:
+#         expGp = file1.loc[i,expgroup].dropna()
+#         ctrlGp = file1.loc[i,ctrlgroup].dropna()
 
-    merge = pd.concat(PVALUE)
+#         Delta = expGp.mean()-ctrlGp.mean()
+#         pval =  stats.ttest_ind(expGp , ctrlGp)[1]
+#         pKS = stats.kstest(expGp , ctrlGp)[1]
+#         pMWU = stats.mannwhitneyu(expGp , ctrlGp)[1]
+#         p = pd.concat([pd.DataFrame(expGp),pd.DataFrame(ctrlGp)]).T
+#         p['Delta'] = Delta
+#         p['pval'] = pval
+#         p['pKS'] = pKS
+#         p['pMWU'] = pMWU
+#         PVALUE.append(p)
 
-    sig = merge[merge.pval <= pvalue]
-    sig_all = sig[(sig.Delta >= cutoff) | (sig.Delta <= -1*cutoff)]
-    
-    sig_all.iloc[:,0] = sig_all.iloc[:,0:].astype(float)-0.0001 
-    sig_all.iloc[:,file1.shape[1]-1] = sig_all.iloc[:,file1.shape[1]-1].astype(float)-0.0001 
+#     merge = pd.concat(PVALUE)
+#     sig = merge[merge.pval <= pvalue]
+#     sig_all = sig[(sig.Delta >= cutoff) | (sig.Delta <= -1*cutoff)]
+#     sig_all.iloc[:,0] = sig_all.iloc[:,0:].astype(float)-0.0001 
+#     sig_all.iloc[:,file1.shape[1]-1] = sig_all.iloc[:,file1.shape[1]-1].astype(float)-0.0001 
+#     sig_all.to_csv('DMR_'+context+'_all_'+str(cutoff)+'.txt', sep='\t')
+#     sig_all[sig_all.Delta >0].to_csv('DMR_'+context+'_hyper_'+str(cutoff)+'.txt',sep='\t')
+#     sig_all[sig_all.Delta <0].to_csv('DMR_'+context+'_hypo_'+ str(cutoff)+'.txt',sep='\t')
 
+def Find_DMR2(context, cutoff, test_method):
+#    union=pd.read_csv('Unionsite.txt',sep='\t',na_values='-')
+#    expgroup = samples[samples[2] == 'WT'][0].to_list()
+#    ctrlgroup = samples[samples[2] == 'met1'][0].to_list()
+    chrs = union['chr'].unique()
+    data_holder = []
+    positions = []
+    meanMaths = []
+    pvalues = []
+    for chromosome in chrs:
+        subset = union[(union['context'] == context) & (union['chr'] == chromosome)]
+        maxPos = subset['pos'].max()
+        bins = range(0,maxPos,region)
+        groups = subset.groupby(pd.cut(subset['pos'], bins))
+        for sRange,sValues in groups:
+            minDepth = sValues.iloc[:,3:].count().min()
+            if minDepth >= qualifiedSite:
+                expValue = sValues.loc[:,expgroup]
+                expValue2 = [x for sublist in expValue.values for x in sublist if math.isnan(x) == False]
+                ctrlValue = sValues.loc[:,ctrlgroup]
+                ctrlValue2 = [x for sublist in ctrlValue.values for x in sublist if math.isnan(x) == False]
+                pKS = stats.kstest(expValue2,ctrlValue2)[1]
+                pMWU = stats.mannwhitneyu(expValue2,ctrlValue2)[1]
+                meanMeth = sValues.iloc[:,3:].astype(float).mean()
+                meanMeth2 = [("%.3f" %x) for x in meanMeth]
+                meanMeth3 = meanMeth + [random.random() * 0.00001 for x in meanMeth]
+                pTTest = 1.0 if meanMeth.sum() == 0 else stats.ttest_ind(meanMeth3.loc[expgroup],meanMeth3.loc[ctrlgroup])[1]
+                methMeth = sValues.iloc[:,3:].astype(float).mean().tolist()
+                start = sRange.left
+                end = sRange.right
+                deltaMean = meanMeth.loc[expgroup].mean() - meanMeth.loc[ctrlgroup].mean()
+                out = [chromosome,start,end] + meanMeth2  + [deltaMean,pTTest,pKS,pMWU]
+                data_holder.append(out)
 
-    sig_all.to_csv('DMR_'+context+'_all_'+str(cutoff)+'.txt', sep='\t')
-
-    sig_all[sig_all.Delta >0].to_csv('DMR_'+context+'_hyper_'+str(cutoff)+'.txt',sep='\t')
-    sig_all[sig_all.Delta <0].to_csv('DMR_'+context+'_hypo_'+ str(cutoff)+'.txt',sep='\t')
-
+    merge = pd.DataFrame(data_holder,columns = ['Chr','Start','End'] + samples[0].tolist() + ['DeltaMean','pTTest','pKS','pMWU'])
+    tests_methods = {0:'pTTest',1:'pKS',2:'pMWU'}
+    pvals = merge.loc[:,tests_methods[test_method]]
+    sig = merge[pvals <= pvalue]
+    sig_all = sig[(sig.DeltaMean >= cutoff) | (sig.DeltaMean <= -1*cutoff)]
+    sig_all.to_csv('DMR_'+context+'_all_'+str(cutoff)+'.txt', sep='\t',index = False)
+    sig_all[sig_all.DeltaMean >0].to_csv('DMR_'+context+'_hyper_'+str(cutoff)+'.txt',sep='\t',index = False)
+    sig_all[sig_all.DeltaMean <0].to_csv('DMR_'+context+'_hypo_'+ str(cutoff)+'.txt',sep='\t',index = False)
 
 def check_dmgempty(file):
 
@@ -288,7 +335,7 @@ def Delta_Meta(context):
      
 ###processing start, generating common regions
 
-context=["CG","CHG","CHH"]
+contexts=["CG","CHG","CHH"]
 #unionsite
 
 combined = pd.DataFrame()
@@ -335,7 +382,7 @@ chrs = union['chr'].unique()
 
 
 #context one by one
-for cxt in context:
+for cxt in contexts:
         outfile = 'CommonRegion_' + cxt + '.txt'
         with open(outfile,'w') as of:
                 of.write('\t'.join(['chr','start','end'] + union.columns.values.tolist()[3:]) + "\n")
@@ -381,6 +428,18 @@ merge2['methylation level'] = merge2['methylation level']*100
 merge2['group'] = merge2.index.map(samples.set_index(0)[2])
 
 #ploting barplot 
+import seaborn as sns
+import matplotlib
+if os.environ.get('DISPLAY','') == '':
+    print('no display found. Using non-interactive Agg backend')
+    matplotlib.use('Agg')
+
+import matplotlib.pyplot as plt
+from matplotlib import rcParams
+import matplotlib as mpl
+matplotlib.rcParams['pdf.fonttype'] = 42
+matplotlib.rcParams['ps.fonttype'] = 42
+
 sns.set_style("whitegrid")
 # sns.set_context("talk")
 sns.set_context("notebook", font_scale=2, rc={"lines.linewidth": 2.5})
@@ -419,9 +478,13 @@ if(Heatmap_PCA=='y'):
     print ("*------------------------*")
     print ("|generating Heatmap $ PCA|")
     print ("*------------------------*")
-    subprocess.call('''Rscript --slave heatmap_PCA_all.R %s %s'''%("CommonRegion_CG.txt",pca_heat_cg_cut), shell=True)
-    subprocess.call('''Rscript --slave heatmap_PCA_all.R %s %s'''%("CommonRegion_CHG.txt",pca_heat_chh_cut), shell=True)
-    subprocess.call('''Rscript --slave heatmap_PCA_all.R %s %s'''%("CommonRegion_CHH.txt",pca_heat_chg_cut), shell=True)
+    if context == 'CG':
+        subprocess.call('''Rscript --slave heatmap_PCA_all.R %s %s'''%("CommonRegion_CG.txt",pca_heat_cut), shell=True)
+    elif context == 'CHG':
+        subprocess.call('''Rscript --slave heatmap_PCA_all.R %s %s'''%("CommonRegion_CHG.txt",pca_heat_cut), shell=True)
+    elif context == 'CHH':
+        subprocess.call('''Rscript --slave heatmap_PCA_all.R %s %s'''%("CommonRegion_CHH.txt",pca_heat_cut), shell=True)
+
 else:
     pass
 
@@ -435,10 +498,8 @@ if(DMR=='y'):
     expgroup = samples[samples[2] == DMR_exp][0]
     ctrlgroup = samples[samples[2] == DMR_ctrl][0]
 
+    Find_DMR2(context,dmr_cut,testmethod) 
 
-    Find_DMR('CG',dmr_CG_cut)
-    Find_DMR('CHG',dmr_CHG_cut)
-    Find_DMR('CHH',dmr_CHH_cut)
 else:
     pass
 
@@ -535,7 +596,7 @@ geneigr.to_csv(input_gene_name+"_IGR_bed6.bed", sep="\t", index=False, header=No
 for i in annotation_name:
         subprocess.call('''bedtools sort -i %s|bedtools merge -c 4,5,6 -o collapse,collapse,collapse >%s '''%(input_gene_name+'_'+i+'_bed6.bed',input_gene_name +'_'+i+'_merge.bed'),shell=True)
 
-#subprocess.call('''rm *3utr_bed6.bed |rm *cds_bed6.bed | rm *5utr_bed6.bed | rm *exons_bed6.bed | rm *gene_igr_bed6.bed | rm *introns_bed6.bed |rm *3utr.bed|rm *5utr.bed |rm *_cds.bed|rm *_exons.bed|rm *_igr.bed|rm *_introns.bed ''',shell=True)
+subprocess.call('''rm *3utr_bed6.bed |rm *cds_bed6.bed | rm *5utr_bed6.bed | rm *exons_bed6.bed | rm *gene_igr_bed6.bed | rm *introns_bed6.bed ''',shell=True)
 
 
 
@@ -545,9 +606,10 @@ if(Fold_Enrichment=='y'):
     print ("|Applying DMR enrichment analysis|")
     print ("*--------------------------------*")
 
-    Enrichment('CG', dmr_CG_cut)
-    Enrichment('CHG', dmr_CHG_cut)
-    Enrichment('CHH', dmr_CHH_cut)
+    Enrichment(context, dmr_cut)
+#    Enrichment('CG', dmr_CG_cut)
+#    Enrichment('CHG', dmr_CHG_cut)
+#    Enrichment('CHH', dmr_CHH_cut)
 
 else:
     pass
@@ -565,33 +627,28 @@ if(DMG=='y'):
     print ("*---------------*")
     print ("|Identifying DMG|")
     print ("*---------------*")
-
-    bed_form("DMR_CG_all_"+str(dmr_CG_cut)+".txt")
-    bed_form("DMR_CG_hyper_"+str(dmr_CG_cut)+".txt")
-    bed_form("DMR_CG_hypo_"+str(dmr_CG_cut)+".txt")
-    
-    bed_form("DMR_CHG_all_"+str(dmr_CHG_cut)+".txt")
-    bed_form("DMR_CHG_hyper_"+str(dmr_CHG_cut)+".txt")
-    bed_form("DMR_CHG_hypo_"+str(dmr_CHG_cut)+".txt")
-
-    bed_form("DMR_CHH_all_"+str(dmr_CHH_cut)+".txt")
-    bed_form("DMR_CHH_hyper_"+str(dmr_CHH_cut)+".txt")
-    bed_form("DMR_CHH_hypo_"+str(dmr_CHH_cut)+".txt")
-    
-
-    # dmg('CG',"DMR_CG_all_"+str(dmr_CG_cut)+".txt.bed", dmr_CG_cut)
-    dmg('CG',"DMR_CG_hyper_"+str(dmr_CG_cut)+".txt.bed",'hyper', dmr_CG_cut)
-    dmg('CG',"DMR_CG_hypo_"+str(dmr_CG_cut)+".txt.bed", 'hypo',dmr_CG_cut)
-
-    dmg('CHG',"DMR_CHG_hyper_"+str(dmr_CHG_cut)+".txt.bed",'hyper', dmr_CHG_cut)
-    dmg('CHG',"DMR_CHG_hypo_"+str(dmr_CHG_cut)+".txt.bed", 'hypo',dmr_CHG_cut)
-
-    dmg('CHH',"DMR_CHH_hyper_"+str(dmr_CHH_cut)+".txt.bed",'hyper', dmr_CHH_cut)
-    dmg('CHH',"DMR_CHH_hypo_"+str(dmr_CHH_cut)+".txt.bed", 'hypo',dmr_CHH_cut)
-
-    DMR_DMGPlot('CG', dmr_CG_cut )
-    DMR_DMGPlot('CHG',dmr_CHG_cut)
-    DMR_DMGPlot('CHH',dmr_CHH_cut)
+    if context == 'CG':
+        bed_form("DMR_CG_all_"+str(dmr_cut)+".txt")
+        bed_form("DMR_CG_hyper_"+str(dmr_cut)+".txt")
+        bed_form("DMR_CG_hypo_"+str(dmr_cut)+".txt")
+        # dmg('CG',"DMR_CG_all_"+str(dmr_CG_cut)+".txt.bed", dmr_CG_cut)
+        dmg('CG',"DMR_CG_hyper_"+str(dmr_cut)+".txt.bed",'hyper', dmr_cut)
+        dmg('CG',"DMR_CG_hypo_"+str(dmr_cut)+".txt.bed", 'hypo',dmr_cut)
+        DMR_DMGPlot('CG', dmr_cut )
+    elif context == 'CHG':
+        bed_form("DMR_CHG_all_"+str(dmr_cut)+".txt")
+        bed_form("DMR_CHG_hyper_"+str(dmr_cut)+".txt")
+        bed_form("DMR_CHG_hypo_"+str(dmr_cut)+".txt")
+        dmg('CHG',"DMR_CHG_hyper_"+str(dmr_cut)+".txt.bed",'hyper', dmr_cut)
+        dmg('CHG',"DMR_CHG_hypo_"+str(dmr_cut)+".txt.bed", 'hypo',dmr_cut)
+        DMR_DMGPlot('CHG',dmr_cut)
+    elif context == 'CHH':
+        bed_form("DMR_CHH_all_"+str(dmr_cut)+".txt")
+        bed_form("DMR_CHH_hyper_"+str(dmr_cut)+".txt")
+        bed_form("DMR_CHH_hypo_"+str(dmr_cut)+".txt")
+        dmg('CHH',"DMR_CHH_hyper_"+str(dmr_CHH_cut)+".txt.bed",'hyper', dmr_cut)
+        dmg('CHH',"DMR_CHH_hypo_"+str(dmr_CHH_cut)+".txt.bed", 'hypo',dmr_cut)
+        DMR_DMGPlot('CHH',dmr_cut)
 
 else:
     pass
@@ -631,9 +688,7 @@ if(ChrView=='y'):
             bins = range(0,maxPos,binSize)
             groups = subset.groupby(pd.cut(subset[2], bins))
 
-            #make list for drawing
-            # with open("chrView_list.txt",'a') as f:
-            #     f.write(sample[1]+'\t'+sample[1]+"_"+str(binSize)+"_chrView.txt"+'\n')
+
 
             for sRange,sValues in groups:
                 Position += 1
@@ -655,7 +710,7 @@ if(ChrView=='y'):
     for sample in chrlist[0]:
         subprocess.call(''' (head -n 1 %s && tail -n +2 %s |sort -k2,2 -V -s) > %s '''%(sample+'_tmpchrView.txt',sample+'_tmpchrView.txt',sample+"_"+str(binSize)+'_chrView.txt'), shell = True)
 
-    #subprocess.call('''rm *_tmpchrView.txt''',shell=True)
+    subprocess.call('''rm *_tmpchrView.txt''',shell=True)
 
     #plotting
     subprocess.call("Rscript --slave chrView.R" , shell=True)
