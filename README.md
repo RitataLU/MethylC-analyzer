@@ -148,7 +148,7 @@ positional arguments:
   input_gtf_file      path of gene annotation
 
   
-  ```
+
   
   ## Arguments
   -h, --help          show this help message and exit
@@ -164,7 +164,7 @@ positional arguments:
   -pvalue PVALUE      p-value cutoff for identifying DMR. Default = 0.05
   -bs BIN_SIZE        Bin size of chrView and Metaplot. Default = 1000000
   -p PROMOTER_SIZE    promoter_size
-    ```
+  ```
 
 ** activate interface (Users select analysis that want to process)
 ```
