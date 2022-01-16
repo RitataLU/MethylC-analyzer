@@ -849,18 +849,18 @@ else:
 
 
 #### output plotting log ###
-fp = open("plot.log2", "a")
+fp = open("plot.log", "a")
 print("#command used for plotting", file=fp)
 fp.close()
 
 if (Heatmap_PCA=='y'):
-    fp = open("plot.log2", "a")
+    fp = open("plot.log", "a")
     print("#PCA & Heatmap:",file=fp)
     print ("Rscript --slave heatmap_PCA_all.R CommonRegion_"+context+".txt "+ str(pca_heat_cut), file=fp)
     fp.close()
     
 if(ChrView=='y'):
-    fp = open("plot.log2", "a")
+    fp = open("plot.log", "a")
     print("#ChrView:",file=fp)
     print ("Rscript --slave chrView.R", file=fp)
     print("#delta ChrView:",file=fp)
@@ -868,7 +868,7 @@ if(ChrView=='y'):
     fp.close()
 
 if(Metaplot=='y'):
-    fp = open("plot.log2", "a")
+    fp = open("plot.log", "a")
     print("#metaplot:",file=fp)
     print ("Rscript --slave metaplot.R "+ str(metaplot_gene_feature), file=fp)
     print("#delta metaplot:",file=fp)
