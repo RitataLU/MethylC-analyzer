@@ -78,7 +78,7 @@ $ cp ../../scripts/* ./
 
 ```
 
-1. A sample description file "samples_list.txt" provides in Demo. The file is tab-delimited without a header.
+1. A sample description file "samples_list.txt" provides in Demo. The file is ***tab-delimited*** without a header.
 
 > Sample Description File (sample_name  CGmap_location  group (tab-delimited, no header in the first line)
 
