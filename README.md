@@ -115,7 +115,7 @@ Please follow the tutorial of example use case
 
 # Run MethylC-analyzer
 
-1.   Make a sample description file and name it as "samples_list.txt" in the location where methylc.py script. The file should be tab-delimited without a header.
+Make a sample description file and name it as "samples_list.txt" in the location where methylc.py script. The file should be tab-delimited without a header.
 
 > Sample Description File (***tab-delimited***, no header in the first line)
 Sample list ( sample_name  CGmap_location  group )
@@ -164,10 +164,10 @@ positional arguments:
   -pvalue PVALUE      p-value cutoff for identifying DMR. Default = 0.05
   -bs BIN_SIZE        Bin size of chrView and Metaplot. Default = 1000000
   -p PROMOTER_SIZE    promoter_size
-  ```
+  
 
-** activate interface (Users select analysis that want to process)
-```
+ ## activate interface (Users select analysis that want to process)
+
 Heatmap & PCA Analysis?  (y/n): y
 Identify DMR?  (y/n): y
 Identify DMG?  (y/n): y
