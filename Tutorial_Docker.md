@@ -12,9 +12,9 @@ docker pull peiyulin/methylc
 
 
 
-## Usages
+## Launch MethylC-Analyze container 
 
-To use the MethylC-Analyzer Docker container, the folder has to be mounted from the host system into the container with the -v argument. The examples mount the current working directory under /app inside the container and then run the command:
+To launch the MethylC-Analyzer Docker container, the folder has to be mounted from the host system into the container with the -v argument. The examples mount the current working directory under /app inside the container and then run the command:
 
 
 
