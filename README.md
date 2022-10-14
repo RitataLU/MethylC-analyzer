@@ -111,7 +111,9 @@ python methcalls2CGmap.py -n CX_report.txt.gz -f bismark
 
 # Tutorial 
 Please follow the tutorial of example use case
-[MethylC-analyzer docker version tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/docker_Tutorial.md)
+
+[MethylC-analyzer docker version tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/Tutorial_Docker.md)
+
 [Tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/Tutorial.md)
 
 
