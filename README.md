@@ -5,7 +5,7 @@ MethylC-analyzer is a analyzer developing for analysing DNA methylation on WGBS 
  
 MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and CHH 3 context:
 
-![MethylC-analyzer Flow](https://github.com/RitataLU/MethylC-analyzer/blob/master/MethylC-analyzer_main.png)
+![MethylC-analyzer Flow](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Fig1_tmp.pdf)
 
 * Average methylation level
 * Heatmap for variable regions 
