@@ -2,7 +2,7 @@
 # MethylC-analyzer
 
 MethylC-analyzer is a analyzer developing for analysing DNA methylation on WGBS and RRBS, it could utilize not only individual sample also do comparison between two groups.
- 
+
 MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and CHH 3 context:
 
 ![MethylC-analyzer Flow](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Fig1_tmp.png)
@@ -49,21 +49,30 @@ MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and 
 
 # Installation
 
-1. Obtain Python 3.9
-    
-2. Recommand to create a [conda](https://docs.conda.io/en/latest/miniconda.html) environment somewhere on your disk, and then activate it.
-  
-  ```
-  $ conda create -n methylC_analyzer_env python=3.9
-  $ conda activate methylC_analyzer_env
+###  From Docker 
 
- ```
+:pushpin: Recommend using docker image to avoid enveioment conflict
+
+```dockerfile
+docker pull peiyulin/methylc
+```
+
+### From Github
+
+1. Obtain Python 3.9
+2. Recommend to create a [conda](https://docs.conda.io/en/latest/miniconda.html) environment somewhere on your disk, and then activate it.
+
+  ```
+ $ conda create -n methylC_analyzer_env python=3.9
+ $ conda activate methylC_analyzer_env
+
+  ```
 3. Download the source code and install the requirements.
 
   ```
   $ git clone https://github.com/RitataLU/MethylC-analyzer.git
   
- ```
+  ```
 4. Install Package - Run MethylC-analyzer/requirements/base.txt
 
     ex: sh MethylC-analyzer/requirements/base.txt
@@ -112,7 +121,7 @@ python methcalls2CGmap.py -n CX_report.txt.gz -f bismark
 # Tutorial 
 Please follow the tutorial of example use case
 
-[MethylC-analyzer docker tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/Tutorial_Docker.md)
+[MethylC-analyzer docker tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/Tutorial_Docker.md)  :mega:**Recommend**
 
 [MethylC-analyzer command line tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/Tutorial.md)
 
@@ -194,7 +203,7 @@ enter control group name analysis: WT
 PCA: 
 
  <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/PCA_CG_0.5.png" width="400">
- 
+
 Heatmap: 
 
  <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Heatmap_CG_0.5.png" width="400">
@@ -212,7 +221,7 @@ Heatmap:
 
 <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Summary_DMR_DMG_numbers_CG_0.2.png" width="400">
 
-   
+
 6. Genomic regions fold enrichment analysis for DMRs 
 
 <img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/CG_Fold_Enrichment.png" width="400">
@@ -227,7 +236,7 @@ Heatmap:
 
 
  
-  
-  
-	
+
+
+​	
 
