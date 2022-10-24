@@ -114,7 +114,7 @@ Please follow the tutorial of example use case
 
 [MethylC-analyzer docker tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/Tutorial_Docker.md)
 
-[Tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/Tutorial.md)
+[MethylC-analyzer command line tutorial](https://github.com/RitataLU/MethylC-analyzer/blob/master/Tutorial.md)
 
 
 
