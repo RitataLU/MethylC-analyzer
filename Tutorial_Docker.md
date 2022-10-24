@@ -116,8 +116,7 @@ docker run --rm -v $(pwd):/app peiyulin/methylc:V1.0 python /MethylC-analyzer/sc
 
   * The average methylation for each context (right): Average_methylation_levels.pdf
 
-
-<p align="center"><img src="/Users/pei-yu/Documents/GitHub/MethylC-analyzer/Figures/Heatmap_CG_0.2.pdf" width="250"><img src="/Users/pei-yu/Documents/GitHub/MethylC-analyzer/Figures/PCA_CG_0.2.pdf" width="270"><img src="/Users/pei-yu/Documents/GitHub/MethylC-analyzer/Figures/Average_methylation_levels.pdf" width="270"></p>
+<p align="center"><img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/fig1.png" width="250"><img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/fig2.png" width="270"><img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/fig3.png" width="270"></p>
 
 
 
@@ -154,7 +153,7 @@ docker run --rm -v $(pwd):/app peiyulin/methylc:V1.0 python /MethylC-analyzer/sc
 * Figure
   * Bar chart for DMG: Summary_DMR_DMG_numbers_CG_0.1.pdf
 
-<p align="center"><img src="/Users/pei-yu/Documents/GitHub/MethylC-analyzer/Figures/Summary_DMR_DMG_numbers_CG_0.1.pdf" width="300"></p>
+<p align="center"><img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/fig4.png" width="300"></p>
 
 
 
@@ -173,7 +172,7 @@ docker run --rm -v $(pwd):/app peiyulin/methylc:V1.0 python /MethylC-analyzer/sc
 * Figures
   * Fold_Enrichment plot: CG_Fold_Enrichment.pdf
 
-<p align="center"><img src="/Users/pei-yu/Documents/GitHub/MethylC-analyzer/Figures/CG_Fold_Enrichment.pdf" width="300"></p>
+<p align="center"><img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/fig5.png" width="300"></p>
 
 
 
@@ -193,7 +192,7 @@ docker run --rm -v $(pwd):/app peiyulin/methylc:V1.0 python /MethylC-analyzer/sc
   * Chromosome view of each context (left): chrView_CG.pdf, chrView_CHG.pdf, chrView_CHH.pdf   
   * Delta chromosome view of each context (right): chrView_delta_CG.pdf, chrView_delta_CHG.pdf, chrView_delta_CHH.pdf
 
-<p align="center"><img src="/Users/pei-yu/Documents/GitHub/MethylC-analyzer/Figures/chrView_CG.pdf" width="300"><img src="/Users/pei-yu/Documents/GitHub/MethylC-analyzer/Figures/chrView_delta_CG.pdf" width="300"></p>
+<p align="center"><img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/fig6.png" width="300"><img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/fig7.png" width="300"></p>
 
 #### Metaplot Analysis
 
@@ -215,4 +214,4 @@ docker run --rm -v $(pwd):/app peiyulin/methylc:V1.0 python /MethylC-analyzer/sc
   * Meta gene plots for each context: metaplot_CG.pdf, metaplot_CHG.pdf, metaplot_CHH.pdf
   * Meta gene plots for each context: metaplot_delta_CG.pdf, metaplot_delta_CHG.pdf, metaplot_delta_CHH.pdf
 
-<p align="center"><img src="/Users/pei-yu/Documents/GitHub/MethylC-analyzer/Figures/metaplot_CG.pdf" width="300"><img src="/Users/pei-yu/Documents/GitHub/MethylC-analyzer/Figures/metaplot_delta_CG.pdf" width="300"></p>
+<p align="center"><img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/fig8.png" width="300"><img src="https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/fig9.png" width="300"></p>
