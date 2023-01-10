@@ -3,6 +3,9 @@
 
 MethylC-analyzer is a analyzer developing for analysing DNA methylation on WGBS and RRBS, it could utilize not only individual sample also do comparison between two groups.
 
+### Publication
+[Rita Jui-Hsien Lu☨, Pei-Yu Lin☨, Ming-Ren Yen☨, Bing-Heng Wu, Pao-Yang Chen (2023) MethylC-analyzer: a comprehensive downstream pipeline for the analysis of genome-wide DNA methylation Botanical Studies, https://doi.org/10.1186/s40529-022-00366-5](https://as-botanicalstudies.springeropen.com/articles/10.1186/s40529-022-00366-5)
+
 MethylC-analyzer will produce 7 analysis and each analysis contains CG, CHG and CHH 3 context:
 
 ![MethylC-analyzer Flow](https://github.com/RitataLU/MethylC-analyzer/blob/master/Figures/Fig1_tmp.png)
