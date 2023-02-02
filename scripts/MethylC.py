@@ -46,7 +46,7 @@ parser.add_argument("-dmrc",help="Methylation cutoff of DMR. Default = 0.1",dest
 #parser.add_argument("-dmrchh",help="DMR_CHH_cutoff",dest='dmr_chh_cutoff',default=0.1)
 parser.add_argument("-test",help="DMR testing method. 0:TTest, 1:KS, 2:MWU. Default=0",dest='testMethod',default=0)
 parser.add_argument("-pvalue",help="p-value cutoff for identifying DMR. Default = 0.05",dest='pvalue',default=0.05)
-#parser.add_argument("-fdr",help="fdr for identifying DMR",dest='fdr',default=0.05)
+parser.add_argument("-fdr",help="fdr for identifying DMR",dest='fdr',default=0.05)
 parser.add_argument("-bs",help="Bin size of chrView and Metaplot. Default = 1000000",dest='bin_size',default=1000000)
 parser.add_argument("-p",help="promoter_size",dest='promoter_size',default=2000)
 parser.add_argument("samples_list",help="samples CGmap description")
@@ -646,8 +646,8 @@ if(DMG=='y'):
         bed_form("DMR_CHH_all_"+str(dmr_cut)+".txt")
         bed_form("DMR_CHH_hyper_"+str(dmr_cut)+".txt")
         bed_form("DMR_CHH_hypo_"+str(dmr_cut)+".txt")
-        dmg('CHH',"DMR_CHH_hyper_"+str(dmr_CHH_cut)+".txt.bed",'hyper', dmr_cut)
-        dmg('CHH',"DMR_CHH_hypo_"+str(dmr_CHH_cut)+".txt.bed", 'hypo',dmr_cut)
+        dmg('CHH',"DMR_CHH_hyper_"+str(dmr_cut)+".txt.bed",'hyper', dmr_cut)
+        dmg('CHH',"DMR_CHH_hypo_"+str(dmr_cut)+".txt.bed", 'hypo',dmr_cut)
         DMR_DMGPlot('CHH',dmr_cut)
 
 else:
