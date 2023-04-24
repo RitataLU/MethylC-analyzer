@@ -46,12 +46,13 @@ parser.add_argument("-dmrc",help="Methylation cutoff of DMR. Default = 0.1",dest
 #parser.add_argument("-dmrchh",help="DMR_CHH_cutoff",dest='dmr_chh_cutoff',default=0.1)
 parser.add_argument("-test",help="DMR testing method. 0:TTest, 1:KS, 2:MWU. Default=0",dest='testMethod',default=0)
 parser.add_argument("-pvalue",help="p-value cutoff for identifying DMR. Default = 0.05",dest='pvalue',default=0.05)
-parser.add_argument("-fdr",help="fdr for identifying DMR",dest='fdr',default=0.05)
+#parser.add_argument("-fdr",help="fdr for identifying DMR",dest='fdr',default=0.05)
 parser.add_argument("-bs",help="Bin size of chrView and Metaplot. Default = 1000000",dest='bin_size',default=1000000)
 parser.add_argument("-p",help="promoter_size",dest='promoter_size',default=2000)
+parser.add_argument("command",help="commands of MethylC-Analyser")
 parser.add_argument("samples_list",help="samples CGmap description")
 parser.add_argument("input_gtf_file",help="path of gene annotation")
-
+parser.add_argument("path_to_files",help="path of all target files")
 
 args = parser.parse_args()
 
@@ -73,18 +74,23 @@ context = args.context.upper() if args.context.upper() in ['CG','CHG','CHH'] els
 binSize=int(args.bin_size)
 promoter_size=int(args.promoter_size)
 #input_gene=pd.read_csv(str(args.input_gtf_file),sep='\t',header=None)
-samples_list=str(args.samples_list)
-input_gtf_file=str(args.input_gtf_file)
+path_to_files=str(args.path_to_files)
+samples_list=path_to_files+str(args.samples_list)
+input_gtf_file=path_to_files+str(args.input_gtf_file)
 input_gene_name=input_gtf_file
+command=str(args.command)
+path_to_files=str(args.path_to_files)
+
+
+
 #Choose Tools
-Heatmap_PCA=input('Heatmap & PCA Analysis?  ([y]/n): ') or 'y'
-DMR=input('Identify DMR?  ([y]/n): ') or 'y'
-DMG=input('Identify DMG?  ([y]/n): ') or 'y'
-Fold_Enrichment=input('Use Fold Enrichment Analysis?  ([y]/n): ') or 'y'
-ChrView=input('Chromosome View Analysis?  ([y]/n): ') or 'y'
-Metaplot=input('Metaplot Analysis?  ([y]/n): ') or 'y'
-#DMR_exp=str(input('enter experimental group name analysis: '))
-#DMR_ctrl=str(input('enter control group name analysis: '))
+# Heatmap_PCA=input('Heatmap & PCA Analysis?  ([y]/n): ') or 'y'
+# DMR=input('Identify DMR?  ([y]/n): ') or 'y'
+# DMG=input('Identify DMG?  ([y]/n): ') or 'y'
+# Fold_Enrichment=input('Use Fold Enrichment Analysis?  ([y]/n): ') or 'y'
+# ChrView=input('Chromosome View Analysis?  ([y]/n): ') or 'y'
+# Metaplot=input('Metaplot Analysis?  ([y]/n): ') or 'y'
+
 DMR_exp=args.group1
 DMR_ctrl=args.group2
 
@@ -143,6 +149,7 @@ def Find_DMR2(context, cutoff, test_method):
     pvalues = []
     for chromosome in chrs:
         subset = union[(union['context'] == context) & (union['chr'] == chromosome)]
+        if subset.shape[0] == 0: continue 
         maxPos = subset['pos'].max()
         bins = range(0,maxPos,region)
         groups = subset.groupby(pd.cut(subset['pos'], bins))
@@ -171,9 +178,9 @@ def Find_DMR2(context, cutoff, test_method):
     pvals = merge.loc[:,tests_methods[test_method]]
     sig = merge[pvals <= pvalue]
     sig_all = sig[(sig.DeltaMean >= cutoff) | (sig.DeltaMean <= -1*cutoff)]
-    sig_all.to_csv('DMR_'+context+'_all_'+str(cutoff)+'.txt', sep='\t',index = False)
-    sig_all[sig_all.DeltaMean >0].to_csv('DMR_'+context+'_hyper_'+str(cutoff)+'.txt',sep='\t',index = False)
-    sig_all[sig_all.DeltaMean <0].to_csv('DMR_'+context+'_hypo_'+ str(cutoff)+'.txt',sep='\t',index = False)
+    sig_all.to_csv(path_to_files +'DMR_'+context+'_all_'+str(cutoff)+'.txt', sep='\t',index = False)
+    sig_all[sig_all.DeltaMean >0].to_csv(path_to_files +'DMR_'+context+'_hyper_'+str(cutoff)+'.txt',sep='\t',index = False)
+    sig_all[sig_all.DeltaMean <0].to_csv(path_to_files +'DMR_'+context+'_hypo_'+ str(cutoff)+'.txt',sep='\t',index = False)
 
 def check_dmgempty(file):
 
@@ -187,18 +194,18 @@ def check_dmgempty(file):
 
 def DMR_DMGPlot(Context,cutoff):
 
-    DMR_hyper = pd.read_csv("DMR_"+Context+"_hyper_"+str(cutoff)+".txt", sep='\t')
-    DMR_hypo = pd.read_csv("DMR_"+Context+"_hypo_"+str(cutoff)+".txt", sep='\t')
+    DMR_hyper = pd.read_csv(path_to_files+"DMR_"+Context+"_hyper_"+str(cutoff)+".txt", sep='\t')
+    DMR_hypo = pd.read_csv(path_to_files+"DMR_"+Context+"_hypo_"+str(cutoff)+".txt", sep='\t')
 
     R_hyper = len(DMR_hyper)
     R_hypo = len(DMR_hypo)
 
 
-    Gg_hyper = check_dmgempty("DMG_"+Context+"_hyper_"+str(cutoff)+"_Genebody_list.txt")
-    Gg_hypo  = check_dmgempty("DMG_"+Context+"_hypo_"+str(cutoff)+"_Genebody_list.txt")
+    Gg_hyper = check_dmgempty(path_to_files +"DMG_"+Context+"_hyper_"+str(cutoff)+"_Genebody_list.txt")
+    Gg_hypo  = check_dmgempty(path_to_files +"DMG_"+Context+"_hypo_"+str(cutoff)+"_Genebody_list.txt")
 
-    Gp_hyper = check_dmgempty("DMG_"+Context+"_hyper_"+str(cutoff)+"_Promoter_list.txt")
-    Gp_hypo = check_dmgempty("DMG_"+Context+"_hypo_"+str(cutoff)+"_Promoter_list.txt")
+    Gp_hyper = check_dmgempty(path_to_files +"DMG_"+Context+"_hyper_"+str(cutoff)+"_Promoter_list.txt")
+    Gp_hypo = check_dmgempty(path_to_files +"DMG_"+Context+"_hypo_"+str(cutoff)+"_Promoter_list.txt")
 
     # DMG_hyper_genebody = pd.read_csv("DMG_"+Context+"_hyper_"+str(cutoff)+"_Genebody_list.txt", header=None,sep='\t')
     # DMG_hypo_genebody = pd.read_csv("DMG_"+Context+"_hypo_"+str(cutoff)+"_Genebody_list.txt", header=None,sep='\t')
@@ -226,7 +233,7 @@ def DMR_DMGPlot(Context,cutoff):
     # Set the figure size
     plt.figure(figsize=(10,6)) 
     # grouped barplot
-    sns.barplot(x="Category", y="Number", hue="Direction", data=df, ci=None,palette=colors)
+    sns.barplot(x="Category", y="Number", hue="Direction", data=df, errorbar=None,palette=colors)
     
     plt.legend(fontsize = 15, 
                bbox_to_anchor= (1.01, 1), 
@@ -239,7 +246,7 @@ def DMR_DMGPlot(Context,cutoff):
     mpl.rcParams['pdf.fonttype'] = 42
     mpl.rcParams['ps.fonttype'] = 42
     mpl.rcParams["axes.labelsize"] = 40
-    plt.savefig('Summary_DMR_DMG_numbers_'+ Context+'_'+str(cutoff)+'.pdf',dpi=300,bbox_inches="tight")
+    plt.savefig(path_to_files +'Summary_DMR_DMG_numbers_'+ Context+'_'+str(cutoff)+'.pdf',dpi=300,bbox_inches="tight")
 
 
 #enrichment
@@ -253,7 +260,7 @@ def overlap(bed1,bed2):
 #enrichment plot
 def Enrichment(tag, Cut):
     savefile=pd.DataFrame(columns=["dmr","feature","overlap_size","dmr_size","feature_size","genome_size","enrichment"])
-    dmr="DMR_"+tag+"_all_"+str(Cut)+".txt"
+    dmr=path_to_files +"DMR_"+tag+"_all_"+str(Cut)+".txt"
     for i in annotation_name:
         feature=str(i)
         overlap_size=overlap(input_gene_name +'_'+i+'_merge.bed',bed_form(dmr))
@@ -263,8 +270,8 @@ def Enrichment(tag, Cut):
         else:
             dmr_size=int(subprocess.check_output('''awk '{size+=$3-$2}END{print size}' %s'''%(bed_form(dmr)), shell=True))
 
-        feature_size=overlap(bed_form("CommonRegion_"+tag+".txt"),bed_form(input_gene_name +'_'+i+'_merge.bed'))
-        genome_size=int(subprocess.check_output('''awk '{size+=$3-$2}END{print size}' %s'''%(bed_form("CommonRegion_"+tag+".txt")), shell=True))*1.0
+        feature_size=overlap(bed_form(path_to_files +"CommonRegion_"+tag+".txt"),bed_form(input_gene_name +'_'+i+'_merge.bed'))
+        genome_size=int(subprocess.check_output('''awk '{size+=$3-$2}END{print size}' %s'''%(bed_form(path_to_files +"CommonRegion_"+tag+".txt")), shell=True))*1.0
 
         enrichment= math.log(((float(overlap_size)/float(dmr_size))/(float(feature_size)/float(genome_size))),2)
         out = [dmr,feature,overlap_size,dmr_size,feature_size,genome_size,enrichment]
@@ -285,7 +292,7 @@ def Enrichment(tag, Cut):
         plt.ylabel("Fold Enrichment (log2)")
         plt.title(tag+'_Fold_Enrichment')
         plt.grid()
-        plt.savefig(tag+'_Fold_Enrichment'+'.pdf',dpi=300,bbox_inches='tight')
+        plt.savefig(path_to_files+tag+'_Fold_Enrichment'+'.pdf',dpi=300,bbox_inches='tight')
         #plt.close(fig)
 
 ###generating metaplot_delta files
@@ -299,11 +306,11 @@ def Delta_Meta(context):
 
     exp_df = []
     for expfile in expData:
-        exp_df.append(pd.read_csv(expfile+"_"+ context +".matrix.gz" ,sep='\t', skiprows=1,compression ='gzip',na_values='-',header =None))
+        exp_df.append(pd.read_csv(path_to_files+expfile+"_"+ context +".matrix.gz" ,sep='\t', skiprows=1,compression ='gzip',na_values='-',header =None))
 
     ctrl_df = []
     for ctrlfile in ctrlData:
-        ctrl_df.append(pd.read_csv(ctrlfile+"_"+ context +".matrix.gz" ,sep='\t', skiprows=1,compression ='gzip',na_values='-',header =None))
+        ctrl_df.append(pd.read_csv(path_to_files+ctrlfile+"_"+ context +".matrix.gz" ,sep='\t', skiprows=1,compression ='gzip',na_values='-',header =None))
     
     #sum all valuew in each row in 3 context
     mexp,mctrl=0,0
@@ -328,9 +335,9 @@ def Delta_Meta(context):
     exp_df[0].iloc[:,6:86]=delta
 
     report = exp_df[0]
-    report.to_csv('metaplot_delta_'+context+'.txt',sep='\t',index=False)
+    report.to_csv(path_to_files+'metaplot_delta_'+context+'.txt',sep='\t',index=False)
 
-    pd.DataFrame([[metaplot_exp+' - '+metaplot_ctrl,'metaplot_delta.txt']]).to_csv('metaplot_delta_list.txt',sep='\t',index=False,header=None)
+    pd.DataFrame([[metaplot_exp+' - '+metaplot_ctrl,path_to_files+'metaplot_delta.txt']]).to_csv(path_to_files+'metaplot_delta_list.txt',sep='\t',index=False,header=None)
 
      
 ###processing start, generating common regions
@@ -347,7 +354,7 @@ ctrlgroup = samples[samples[2] == DMR_ctrl][0].to_list()
 
 for sample in samples.itertuples():
     print("Now processing " + sample[2])
-    CGmap = pd.read_csv(sample[2], header=None,sep="\t",dtype =
+    CGmap = pd.read_csv(path_to_files+sample[2], header=None,sep="\t",dtype =
             {0:str,2:str,3:str,5:str,6:str,7:int},usecols=[0,2,3,5,6,7],index_col=[0,1,2],compression='gzip')
 
     CGmap = CGmap.loc[CGmap[7] >= depth,5:5]
@@ -370,12 +377,12 @@ combined[['pos']] = combined[['pos']].astype(int)
 #combined[['chr']] = combined[['chr']].astype(int)
 
 combined = combined.sort_values(['chr','pos'],ascending=[True,True])
-combined.to_csv('Unionsite.txt',sep = '\t',na_rep='-',index=False)
+combined.to_csv(path_to_files+'Unionsite.txt',sep = '\t',na_rep='-',index=False)
 
 
 #common region
 
-union=pd.read_csv('Unionsite.txt',sep='\t',na_values='-')
+union=pd.read_csv(path_to_files+'Unionsite.txt',sep='\t',na_values='-')
 #union=combined
 #1.unionsite --> combined
 chrs = union['chr'].unique()
@@ -383,12 +390,12 @@ chrs = union['chr'].unique()
 
 #context one by one
 for cxt in contexts:
-        outfile = 'CommonRegion_' + cxt + '.txt'
+        outfile = path_to_files+ 'CommonRegion_' + cxt + '.txt'
         with open(outfile,'w') as of:
                 of.write('\t'.join(['chr','start','end'] + union.columns.values.tolist()[3:]) + "\n")
                 for chromosome in chrs:
                         subset = union[(union['context'] == cxt) & (union['chr'] == chromosome)]
-
+                        if subset.shape[0] == 0: continue 
                         maxPos = subset['pos'].max()
                         bins = range(0,maxPos,region)
                         groups = subset.groupby(pd.cut(subset['pos'], bins))
@@ -409,9 +416,9 @@ for cxt in contexts:
                                         pass
 
 ##The Average Methylaion level
-cg = pd.read_csv("CommonRegion_CG.txt",sep="\t")
-chg = pd.read_csv("CommonRegion_CHG.txt",sep="\t")
-chh = pd.read_csv("CommonRegion_CHH.txt",sep="\t")
+cg = pd.read_csv(path_to_files+"CommonRegion_CG.txt",sep="\t")
+chg = pd.read_csv(path_to_files+"CommonRegion_CHG.txt",sep="\t")
+chh = pd.read_csv(path_to_files+"CommonRegion_CHH.txt",sep="\t")
 
 end = cg.shape[1]
 cgdf = pd.DataFrame(cg.iloc[:,3:end].mean())
@@ -471,25 +478,25 @@ mpl.rcParams['pdf.fonttype'] = 42
 mpl.rcParams['ps.fonttype'] = 42
 mpl.rcParams["axes.labelsize"] = 40
 
-plt.savefig('Average_methylation_levels.pdf',dpi=300,bbox_inches="tight")
+plt.savefig(path_to_files +'Average_methylation_levels.pdf',dpi=300,bbox_inches="tight")
 
 #heatmap_PCA
-if(Heatmap_PCA=='y'):
+if(command=='Heatmap_PCA' or command=='all'):
     print ("*------------------------*")
     print ("|generating Heatmap $ PCA|")
     print ("*------------------------*")
     if context == 'CG':
-        subprocess.call('''Rscript --slave heatmap_PCA_all.R %s %s'''%("CommonRegion_CG.txt",pca_heat_cut), shell=True)
+        subprocess.call('''Rscript --slave /MethylC-analyzer/scripts/heatmap_PCA_all.R %s %s %s'''%(path_to_files + "CommonRegion_CG.txt",pca_heat_cut,path_to_files), shell=True)
     elif context == 'CHG':
-        subprocess.call('''Rscript --slave heatmap_PCA_all.R %s %s'''%("CommonRegion_CHG.txt",pca_heat_cut), shell=True)
+        subprocess.call('''Rscript --slave /MethylC-analyzer/scripts/heatmap_PCA_all.R %s %s %s'''%(path_to_files +"CommonRegion_CHG.txt",pca_heat_cut,path_to_files), shell=True)
     elif context == 'CHH':
-        subprocess.call('''Rscript --slave heatmap_PCA_all.R %s %s'''%("CommonRegion_CHH.txt",pca_heat_cut), shell=True)
+        subprocess.call('''Rscript --slave /MethylC-analyzer/scripts/heatmap_PCA_all.R %s %s %s'''%(path_to_files +"CommonRegion_CHH.txt",pca_heat_cut,path_to_files ), shell=True)
 
 else:
     pass
 
 # Identify DMR
-if(DMR=='y'):
+if(command=='DMR' or command=='all'):
 
     print ("*---------------*")
     print ("|Identifying DMR|")
@@ -520,15 +527,15 @@ bed12=[exon,intron,utr5,cds,utr3]
 
 annotation_name=[promoter,gene,exon,intron,utr5,cds,utr3,igr]
 
-subprocess.call('''python ./extract_transcript_regions.py -i %s -o %s --gtf'''%(input_gtf_file,input_gtf_file), shell=True)
+subprocess.call('''python /MethylC-analyzer/scripts/extract_transcript_regions.py -i %s -o %s --gtf'''%(input_gtf_file,input_gtf_file), shell=True)
 
 #Convert this blockbed (bed12) to bed6|
 for i in bed12:
     subprocess.call('''cat %s | bed12ToBed6 -i stdin -n > %s'''%(input_gtf_file+'_'+i+'.bed',input_gtf_file+'_'+i+'_bed6.bed'),shell=True)
     # print (i)
 
-subprocess.call('''rm *_coding*.bed *noncoding*.bed *5utr_start.bed''',shell=True)
-subprocess.call('''rm *3utr.bed|rm *5utr.bed |rm *_cds.bed|rm *_exons.bed|rm *_introns.bed ''',shell=True)
+subprocess.call('''rm %s*3utr.bed %s*5utr.bed %s*_cds.bed %s*_exons.bed %s*_introns.bed '''%(path_to_files,path_to_files,path_to_files,path_to_files,path_to_files),shell=True)
+subprocess.call('''rm %s*_coding*.bed %s*noncoding*.bed %s*5utr_start.bed'''%(path_to_files,path_to_files,path_to_files),shell=True)
 
 #find gene_body.bed
 genes = pd.read_csv(str(input_gtf_file), header=None, sep="\t",dtype = {0 :str})
@@ -596,12 +603,12 @@ geneigr.to_csv(input_gene_name+"_IGR_bed6.bed", sep="\t", index=False, header=No
 for i in annotation_name:
         subprocess.call('''bedtools sort -i %s|bedtools merge -c 4,5,6 -o collapse,collapse,collapse >%s '''%(input_gene_name+'_'+i+'_bed6.bed',input_gene_name +'_'+i+'_merge.bed'),shell=True)
 
-subprocess.call('''rm *3utr_bed6.bed |rm *cds_bed6.bed | rm *5utr_bed6.bed | rm *exons_bed6.bed | rm *gene_igr_bed6.bed | rm *introns_bed6.bed ''',shell=True)
+subprocess.call('''rm %s*3utr_bed6.bed %s*cds_bed6.bed %s*5utr_bed6.bed %s*exons_bed6.bed %s*gene_igr_bed6.bed %s*introns_bed6.bed '''%(path_to_files,path_to_files,path_to_files,path_to_files,path_to_files,path_to_files),shell=True)
 
 
 
 #DMR enrichmet cal & plot
-if(Fold_Enrichment=='y'):
+if(command=='Fold_Enrichment' or command=='all'):
     print ("*--------------------------------*")
     print ("|Applying DMR enrichment analysis|")
     print ("*--------------------------------*")
@@ -616,38 +623,38 @@ else:
 
 #DMG
 def dmg(tag,dmrfile,direction,cutoff):
-    subprocess.call('''bedtools intersect -a %s -b %s -wo >%s '''%(dmrfile,input_gene_name +'_Genebody_bed6.bed',"DMG_"+tag+"_"+direction+"_"+str(cutoff)+"_Genebody_list.txt"),shell=True)
-    subprocess.call('''bedtools intersect -a %s -b %s -wo >%s '''%(dmrfile,input_gene_name +'_Promoter_bed6.bed',"DMG_"+tag+"_"+direction+"_"+str(cutoff)+"_Promoter_list.txt"),shell=True)
+    subprocess.call('''bedtools intersect -a %s -b %s -wo >%s '''%(dmrfile,input_gene_name +'_Genebody_bed6.bed',path_to_files+"DMG_"+tag+"_"+direction+"_"+str(cutoff)+"_Genebody_list.txt"),shell=True)
+    subprocess.call('''bedtools intersect -a %s -b %s -wo >%s '''%(dmrfile,input_gene_name +'_Promoter_bed6.bed',path_to_files+"DMG_"+tag+"_"+direction+"_"+str(cutoff)+"_Promoter_list.txt"),shell=True)
     
  
 
 
-if(DMG=='y'):
+if(command=='DMG' or command=='all' ):
 
     print ("*---------------*")
     print ("|Identifying DMG|")
     print ("*---------------*")
     if context == 'CG':
-        bed_form("DMR_CG_all_"+str(dmr_cut)+".txt")
-        bed_form("DMR_CG_hyper_"+str(dmr_cut)+".txt")
-        bed_form("DMR_CG_hypo_"+str(dmr_cut)+".txt")
+        bed_form(path_to_files+"DMR_CG_all_"+str(dmr_cut)+".txt")
+        bed_form(path_to_files+"DMR_CG_hyper_"+str(dmr_cut)+".txt")
+        bed_form(path_to_files+"DMR_CG_hypo_"+str(dmr_cut)+".txt")
         # dmg('CG',"DMR_CG_all_"+str(dmr_CG_cut)+".txt.bed", dmr_CG_cut)
-        dmg('CG',"DMR_CG_hyper_"+str(dmr_cut)+".txt.bed",'hyper', dmr_cut)
-        dmg('CG',"DMR_CG_hypo_"+str(dmr_cut)+".txt.bed", 'hypo',dmr_cut)
+        dmg('CG',path_to_files+"DMR_CG_hyper_"+str(dmr_cut)+".txt.bed",'hyper', dmr_cut)
+        dmg('CG',path_to_files+"DMR_CG_hypo_"+str(dmr_cut)+".txt.bed", 'hypo',dmr_cut)
         DMR_DMGPlot('CG', dmr_cut )
     elif context == 'CHG':
-        bed_form("DMR_CHG_all_"+str(dmr_cut)+".txt")
-        bed_form("DMR_CHG_hyper_"+str(dmr_cut)+".txt")
-        bed_form("DMR_CHG_hypo_"+str(dmr_cut)+".txt")
-        dmg('CHG',"DMR_CHG_hyper_"+str(dmr_cut)+".txt.bed",'hyper', dmr_cut)
-        dmg('CHG',"DMR_CHG_hypo_"+str(dmr_cut)+".txt.bed", 'hypo',dmr_cut)
+        bed_form(path_to_files+"DMR_CHG_all_"+str(dmr_cut)+".txt")
+        bed_form(path_to_files+"DMR_CHG_hyper_"+str(dmr_cut)+".txt")
+        bed_form(path_to_files+"DMR_CHG_hypo_"+str(dmr_cut)+".txt")
+        dmg('CHG',path_to_files+"DMR_CHG_hyper_"+str(dmr_cut)+".txt.bed",'hyper', dmr_cut)
+        dmg('CHG',path_to_files+"DMR_CHG_hypo_"+str(dmr_cut)+".txt.bed", 'hypo',dmr_cut)
         DMR_DMGPlot('CHG',dmr_cut)
     elif context == 'CHH':
-        bed_form("DMR_CHH_all_"+str(dmr_cut)+".txt")
-        bed_form("DMR_CHH_hyper_"+str(dmr_cut)+".txt")
-        bed_form("DMR_CHH_hypo_"+str(dmr_cut)+".txt")
-        dmg('CHH',"DMR_CHH_hyper_"+str(dmr_cut)+".txt.bed",'hyper', dmr_cut)
-        dmg('CHH',"DMR_CHH_hypo_"+str(dmr_cut)+".txt.bed", 'hypo',dmr_cut)
+        bed_form(path_to_files+"DMR_CHH_all_"+str(dmr_cut)+".txt")
+        bed_form(path_to_files+"DMR_CHH_hyper_"+str(dmr_cut)+".txt")
+        bed_form(path_to_files+"DMR_CHH_hypo_"+str(dmr_cut)+".txt")
+        dmg('CHH',path_to_files+"DMR_CHH_hyper_"+str(dmr_CHH_cut)+".txt.bed",'hyper', dmr_cut)
+        dmg('CHH',path_to_files+"DMR_CHH_hypo_"+str(dmr_CHH_cut)+".txt.bed", 'hypo',dmr_cut)
         DMR_DMGPlot('CHH',dmr_cut)
 
 else:
@@ -655,7 +662,7 @@ else:
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------------
 #####chrview
-if(ChrView=='y'):
+if(command=='ChrView' or command=='all'):
 
     chrview_exp= DMR_exp
     chrview_ctrl= DMR_ctrl
@@ -671,11 +678,11 @@ if(ChrView=='y'):
     #binSize = 100000000
     for sample in samples.itertuples():
         #print("Now reading " + sample[2])
-        CGmap = pd.read_csv(sample[2], compression='gzip',header=None,sep="\t",dtype = {0 :str})
+        CGmap = pd.read_csv(path_to_files+sample[2], compression='gzip',header=None,sep="\t",dtype = {0 :str})
         chrs = CGmap[0].unique()
         Position = 0
         #print ("Position\tchromosome\tsRange\tmeanCG\tmeanCHG\tmeanCHH")
-        with open("chrView_list.txt",'a') as f:
+        with open(path_to_files+"chrView_list.txt",'a') as f:
             f.write(sample[1]+'\t'+sample[1]+"_"+str(binSize)+"_chrView.txt"+'\n')
 
         #savefile=pd.DataFrame(columns=["Position","chromosome","sRange","meanCG","meanCHG","meanCHH"])
@@ -683,6 +690,7 @@ if(ChrView=='y'):
         #mylist=[]
         for chromosome in chrs:
             subset = CGmap[(CGmap[7] >= depth) & (CGmap[0] == chromosome) ]
+            if subset.shape[0] == 0: continue 
             subset = subset._convert(numeric=True)
             maxPos = subset[2].max()
             bins = range(0,maxPos,binSize)
@@ -701,33 +709,33 @@ if(ChrView=='y'):
 
                 out = pd.Series([Position,chromosome,start,end,meanCG,meanCHG,meanCHH],index=["Position","chromosome","start","end","meanCG","meanCHG","meanCHH"])
                 savefile=savefile.append(out,ignore_index=True)
-        savefile.to_csv(sample[1]+"_tmpchrView.txt",sep='\t',index=None)
+        savefile.to_csv(path_to_files+sample[1]+"_tmpchrView.txt",sep='\t',index=None)
     #sort chromosome
-    chrlist=pd.read_csv("chrView_list.txt",header=None,sep='\t')
+    chrlist=pd.read_csv(path_to_files+"chrView_list.txt",header=None,sep='\t')
     chrlist[2] = chrlist[0].map(samples.set_index(0)[2])
-    chrlist.to_csv("chrView_list.txt", sep ='\t',index=None, header=None)
+    chrlist.to_csv(path_to_files+"chrView_list.txt", sep ='\t',index=None, header=None)
 
     for sample in chrlist[0]:
-        subprocess.call(''' (head -n 1 %s && tail -n +2 %s |sort -k2,2 -V -s) > %s '''%(sample+'_tmpchrView.txt',sample+'_tmpchrView.txt',sample+"_"+str(binSize)+'_chrView.txt'), shell = True)
+        subprocess.call(''' (head -n 1 %s && tail -n +2 %s |sort -k2,2 -V -s) > %s '''%(path_to_files+sample+'_tmpchrView.txt',path_to_files+sample+'_tmpchrView.txt',path_to_files+sample+"_"+str(binSize)+'_chrView.txt'), shell = True)
 
-    subprocess.call('''rm *_tmpchrView.txt''',shell=True)
+    subprocess.call('''rm %s*_tmpchrView.txt'''%(path_to_files),shell=True)
 
     #plotting
-    subprocess.call("Rscript --slave chrView.R" , shell=True)
+    subprocess.call("Rscript --slave /MethylC-analyzer/scripts/chrView.R %s"%(path_to_files) , shell=True)
     
 ############chrView_delta################################################
-    chrlist=pd.read_csv("chrView_list.txt",header=None,sep='\t')
+    chrlist=pd.read_csv(path_to_files +"chrView_list.txt",header=None,sep='\t')
     
     expData = chrlist[chrlist.iloc[:,2] == chrview_exp][1]
     ctrlData = chrlist[chrlist.iloc[:,2] == chrview_ctrl][1]
     # read chrview files in two group 
     exp_df = []
     for expfile in expData:
-        exp_df.append(pd.read_csv(expfile ,sep='\t'))
+        exp_df.append(pd.read_csv(path_to_files+expfile ,sep='\t'))
 
     ctrl_df = []
     for ctrlfile in ctrlData:
-        ctrl_df.append(pd.read_csv(ctrlfile ,sep='\t'))
+        ctrl_df.append(pd.read_csv(path_to_files+ctrlfile ,sep='\t'))
     
     #sum all valuew in each row in 3 context
     mcgexp,mchgexp,mchhexp,mcgctrl,mchgctrl,mchhctrl=0,0,0,0,0,0
@@ -763,13 +771,13 @@ if(ChrView=='y'):
     exp_df[0].iloc[:,6]=mchh
     report = exp_df[0]
     report.columns = ['Position', 'chromosome', 'start', 'end', 'deltaCG', 'deltaCHG','deltaCHH']
-    report.to_csv('chrView_delta.txt',sep='\t',index=False)
+    report.to_csv(path_to_files+'chrView_delta.txt',sep='\t',index=False)
 
-    pd.DataFrame([[chrview_exp+' - '+chrview_ctrl,'chrView_delta.txt']]).to_csv('chrView_delta_list.txt',sep='\t',index=False,header=None)
+    pd.DataFrame([[path_to_files+chrview_exp+' - '+chrview_ctrl,'chrView_delta.txt']]).to_csv(path_to_files+'chrView_delta_list.txt',sep='\t',index=False,header=None)
 
 
     #plotting chrview difference
-    subprocess.call("Rscript --slave chrView_delta.R", shell=True)
+    subprocess.call("Rscript --slave /MethylC-analyzer/scripts/chrView_delta.R %s"%(path_to_files), shell=True)
 else:
     pass
 
@@ -777,7 +785,7 @@ else:
 
 #metaplot
 
-if(Metaplot=='y'):
+if(command=='Metaplot' or command=='all'):
     metaplot_exp=DMR_exp
     metaplot_ctrl=DMR_ctrl
     
@@ -795,15 +803,15 @@ if(Metaplot=='y'):
     for chr in cgmap.iloc[:,0].unique():
         k=cgmap[cgmap.iloc[:,0]==chr]
         maxPos=k.iloc[:,1].max()
-        bwheader.append((str(chr),maxPos))
+        bwheader.append((str(chr),int(maxPos)))
 
     #3 first sample
     for i in range(3,cgmap.shape[1]):
         #print i
         Samplename=cgmap.columns[i]
-        cgoutfile=Samplename+"_CG.bw"
-        chgoutfile=Samplename+"_CHG.bw"
-        chhoutfile=Samplename+"_CHH.bw"
+        cgoutfile=path_to_files+Samplename+"_CG.bw"
+        chgoutfile=path_to_files+Samplename+"_CHG.bw"
+        chhoutfile=path_to_files+Samplename+"_CHH.bw"
 
         bw_CG = pyBigWig.open(cgoutfile,"w")
         bw_CG.addHeader(bwheader)
@@ -829,20 +837,20 @@ if(Metaplot=='y'):
         #catch warninig 
         devnull = open(os.devnull, 'w')
            
-        subprocess.call('''computeMatrix scale-regions -S %s -R %s -a 2000 -b 2000 -m 4000 -bs 100 -out %s'''%(Samplename+"_CG.bw",genebodybed,Samplename+"_CG.matrix.gz"),shell=True,stdout=devnull, stderr=devnull)
-        subprocess.call('''computeMatrix scale-regions -S %s -R %s -a 2000 -b 2000 -m 4000 -bs 100 -out %s'''%(Samplename+"_CHG.bw",genebodybed,Samplename+"_CHG.matrix.gz"),shell=True,stdout=devnull, stderr=devnull)
-        subprocess.call('''computeMatrix scale-regions -S %s -R %s -a 2000 -b 2000 -m 4000 -bs 100 -out %s'''%(Samplename+"_CHH.bw",genebodybed,Samplename+"_CHH.matrix.gz"),shell=True,stdout=devnull, stderr=devnull)
+        subprocess.call('''computeMatrix scale-regions -S %s -R %s -a 2000 -b 2000 -m 4000 -bs 100 -out %s'''%(path_to_files+Samplename+"_CG.bw",genebodybed,path_to_files+Samplename+"_CG.matrix.gz"),shell=True,stdout=devnull, stderr=devnull)
+        subprocess.call('''computeMatrix scale-regions -S %s -R %s -a 2000 -b 2000 -m 4000 -bs 100 -out %s'''%(path_to_files+Samplename+"_CHG.bw",genebodybed,path_to_files+Samplename+"_CHG.matrix.gz"),shell=True,stdout=devnull, stderr=devnull)
+        subprocess.call('''computeMatrix scale-regions -S %s -R %s -a 2000 -b 2000 -m 4000 -bs 100 -out %s'''%(path_to_files+Samplename+"_CHH.bw",genebodybed,path_to_files+Samplename+"_CHH.matrix.gz"),shell=True,stdout=devnull, stderr=devnull)
 
     #metaplot
 
-    subprocess.call("Rscript --slave metaplot.R "+metaplot_gene_feature,shell=True)
+    subprocess.call("Rscript --slave /MethylC-analyzer/scripts/metaplot.R "+path_to_files+ ' '+metaplot_gene_feature,shell=True)
 
     ##generating delta files
     Delta_Meta('CG')
     Delta_Meta('CHG')
     Delta_Meta('CHH')
     #ploting delta meta
-    subprocess.call("Rscript --slave metaplot_delta.R " +metaplot_exp+' '+metaplot_ctrl,shell=True)
+    subprocess.call("Rscript --slave /MethylC-analyzer/scripts/metaplot_delta.R " +metaplot_exp+' '+metaplot_ctrl + ' '+path_to_files,shell=True)
 
 else:
     pass
@@ -853,24 +861,24 @@ fp = open("plot.log", "a")
 print("#command used for plotting", file=fp)
 fp.close()
 
-if (Heatmap_PCA=='y'):
-    fp = open("plot.log", "a")
+if (command=='Heatmap_PCA' or command=='all'):
+    fp = open(path_to_files +"plot.log", "a")
     print("#PCA & Heatmap:",file=fp)
-    print ("Rscript --slave heatmap_PCA_all.R CommonRegion_"+context+".txt "+ str(pca_heat_cut), file=fp)
+    print ("Rscript --slave /MethylC-analyzer/scripts/heatmap_PCA_all.R "+ path_to_files +"CommonRegion_"+context+".txt "+ str(pca_heat_cut)+ " "+str(path_to_files), file=fp)
     fp.close()
     
-if(ChrView=='y'):
+if(command=='ChrView' or command=='all'):
     fp = open("plot.log", "a")
     print("#ChrView:",file=fp)
-    print ("Rscript --slave chrView.R", file=fp)
+    print ("Rscript --slave /MethylC-analyzer/scripts/chrView.R", file=fp)
     print("#delta ChrView:",file=fp)
-    print ("Rscript --slave chrView_delta.R", file=fp)
+    print ("Rscript --slave /MethylC-analyzer/scripts/chrView_delta.R", file=fp)
     fp.close()
 
-if(Metaplot=='y'):
+if(command=='Metaplot' or command=='all'):
     fp = open("plot.log", "a")
     print("#metaplot:",file=fp)
-    print ("Rscript --slave metaplot.R "+ str(metaplot_gene_feature), file=fp)
+    print ("Rscript --slave /MethylC-analyzer/scripts/metaplot.R "+ str(metaplot_gene_feature), file=fp)
     print("#delta metaplot:",file=fp)
-    print ("Rscript --slave metaplot.R "+ str(metaplot_exp)+' '+str(metaplot_ctrl), file=fp)
+    print ("Rscript --slave /MethylC-analyzer/scripts/metaplot.R "+ str(metaplot_exp)+' '+str(metaplot_ctrl), file=fp)
     fp.close()
